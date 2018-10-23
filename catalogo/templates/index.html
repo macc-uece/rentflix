@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>AluguelFilmes Home</h1>
+  <p>Bem-Vindo ao AluguelFilmes online, um website desenvolvido para facilitar sua vida</p>
+  <h2>Catálogo</h2>
+  <ul>
+    <li><strong>Filmes:</strong> {{ num_filmes }}</li>
+    <li><strong>Filmes disponíveis:</strong> {{ num_instancias_disponiveis }}</li>
+    <li><strong>Diretores:</strong> {{ num_diretores }}</li>
+  </ul>
+{% endblock %}
