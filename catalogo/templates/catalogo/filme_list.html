@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Lista de Filmes</h1>
+
+    {% if filme_list %}
+    <ul>
+
+      {% for filme in filme_list %}
+      <li>
+        <a href="{{ filme.get_absolute_url }}">{{ filme.titulo }}</a> ({{filme.diretor}})
+        <a href="#" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>Não existe filmes disponíveis na locadora.</p>
+    {% endif %}       
+{% endblock %}
