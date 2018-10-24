@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Lista de Diretores</h1>
+
+    {% if diretor_list %}
+    <ul>
+
+      {% for diretor in diretor_list %}
+      <li>
+        <a href="{{ diretor.get_absolute_url }}">{{ diretor.nome }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>Não existe diretores.</p>
+    {% endif %}       
+{% endblock %}

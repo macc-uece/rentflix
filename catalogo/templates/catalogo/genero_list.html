@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Lista de Gêneros de Filmes</h1>
+
+    {% if genero_list %}
+    <ul>
+
+      {% for genero in genero_list %}
+      <li>
+        <a href="{{ genero.get_absolute_url }}">{{ genero.nome }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>Não existe gêneros de filmes no nosso banco de dados.</p>
+    {% endif %}       
+{% endblock %}
