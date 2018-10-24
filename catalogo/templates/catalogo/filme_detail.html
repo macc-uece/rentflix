@@ -8,16 +8,16 @@
 <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
 <p><strong>Poster:</strong> {{ filme.poster }}</p> 
 <p><strong>Genero:</strong> {% for genero in filme.genero.all %}{{genero}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
-<!--<div style="margin-left:20px;margin-top:20px">
-<h4>Filmes</h4>
+<div style="margin-left:20px;margin-top:20px">
+	<h4>Filme</h4>
 
-{% for filme in filme.filmeinstancia_set.all %}
-<hr>
-<p class="{% if filme.status == 'd' %}text-success{% elif filme.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ filme.get_status_display }}</p>
-{% if filme.status != 'd' %}<p><strong>Deve ser devolvido:</strong> {{filme.due_back}}</p>{% endif %}
-<p><strong>Imprint:</strong> {{filme.imprint}}</p>
-<p class="text-muted"><strong>Id:</strong> {{filme.id}}</p>
+	{% for filme in filme.filmeinstancia_set.all %}
+	<hr>
+	<p class="{% if filme.status == 'd' %}text-success{% elif filme.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ filme.get_status_display }}</p>
+	{% if filme.status != 'd' %}<p><strong>Deve ser devolvido:</strong> {{filme.due_back}}</p>{% endif %}
+	<p><strong>Imprint:</strong> {{filme.imprint}}</p>
+	<p class="text-muted"><strong>Id:</strong> {{filme.id}}</p>
 
-{% endfor %}-->
+	{% endfor %}
 </div>
 {% endblock %}

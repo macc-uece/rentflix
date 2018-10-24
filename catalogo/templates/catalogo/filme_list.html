@@ -9,7 +9,6 @@
       {% for filme in filme_list %}
       <li>
         <a href="{{ filme.get_absolute_url }}">{{ filme.titulo }}</a> ({{filme.diretor}})
-        <a href="#" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
       </li>
       {% endfor %}
 
