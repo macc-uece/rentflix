@@ -114,6 +114,8 @@ class HistoricoAluguel(models.Model):
         filmeAlugado = FilmeInstancia.objects.get(id=filmeAlugado_id)
         filmeAlugado.status='e'
         filmeAlugado.save()
+        historico = HistoricoAluguel(id=filmeAlugado_id, filme=filmeAlugado.filme, usuario=self, data_devolucao=filmeAlugado.data_devolucao)
+        historico.save()
 
 
     
