@@ -28,6 +28,26 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
+def pagar(request):
+    filmeEscolhido= Filme.objects.all().filter(titulo__exact='Jumanji')
+    context = {
+       
+        'filmeEscolhido' : filmeEscolhido,
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'pagamento.html', context=context)
+
+def alugar(request, filme_titulo):
+    filmeEscolhido= Filme.objects.all().filter(titulo__exact=filme_titulo)
+    perfil_logado = get_perfil_logado(request)
+    perfil_logado.alugarFilme(filmeEscolhido)
+    return redirect('pagar')
+
+def get_perfil_logado(request):
+    return request.user.perfil
+
+
 from django.views import generic
 
 
@@ -71,3 +91,4 @@ class GeneroDetailView(generic.DetailView):
     Generic class-based detail view for an author.
     """
     model = Genero
+

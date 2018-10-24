@@ -76,6 +76,7 @@ class FilmeInstancia(models.Model):
         """ String representando o modelo do objeto """
         return f"{self.id} ({self.filme.titulo})"
 
+
 class Diretor(models.Model):
     """ Este modelo represente um diretor de um filme """
     nome = models.CharField(max_length = 200)
@@ -87,4 +88,32 @@ class Diretor(models.Model):
     def __str__(self):
         """ String representando o modelo do objeto """
         return self.nome
+    
+
+class HistoricoAluguel(models.Model):
+    id = models.UUIDField(primary_key = True, default = 'uuid.uuid')
+    filme = models.ForeignKey('Filme', on_delete = models.SET_NULL, null = True)
+    usuario = models.CharField(max_length = 200)
+    data_devolucao = models.DateField(null = True, blank = True)
+
+    STATUS_EMPRESTIMO = (
+        ('m', 'Manutenção'),
+        ('e', 'Emprestado'),
+        ('d', 'Disponível'),
+        ('r', 'Reservado'),
+    )
+
+    status = models.CharField(
+        max_length = 1,
+        choices = STATUS_EMPRESTIMO,
+        blank = True,
+        default = 'm'
+    )
+
+    def alugarFilme(self, filmeAlugado_id):
+        filmeAlugado = FilmeInstancia.objects.get(id=filmeAlugado_id)
+        filmeAlugado.status='e'
+        filmeAlugado.save()
+
+
     

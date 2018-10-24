@@ -9,4 +9,6 @@ urlpatterns = [
    path('diretor/<int:pk>', views.DiretorDetailView.as_view(), name='diretor-info'),
    path('generos/', views.GeneroListView.as_view(), name='generos'),
    path('genero/<int:pk>', views.GeneroDetailView.as_view(), name='genero-info'),
+   path('pagar/', views.pagar, name='pagar'), 
+   path('alugar/', views.alugar, name='alugar'), 
 ]
