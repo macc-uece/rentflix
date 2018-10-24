@@ -12,12 +12,17 @@ def index(request):
     
     # The 'all()' is implied by default.    
     num_diretores = Diretor.objects.count()
+    filmesDisponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
+    filmes = Filme.objects.all()
+
     
     context = {
         'num_filmes': num_filmes,
         'num_instancias': num_instancias,
         'num_instancias_disponiveis':  num_instancias_disponiveis,
         'num_diretores': num_diretores,
+        'filmesDisponiveis': filmesDisponiveis,
+        'filmes' : filmes,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -52,3 +57,17 @@ class DiretorDetailView(generic.DetailView):
     Generic class-based detail view for an author.
     """
     model = Diretor
+
+class GeneroListView(generic.ListView):
+    """
+    Generic class-based list view for a list of authors.
+    """
+    model = Genero
+    paginate_by = 10 
+
+
+class GeneroDetailView(generic.DetailView):
+    """
+    Generic class-based detail view for an author.
+    """
+    model = Genero

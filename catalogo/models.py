@@ -13,6 +13,10 @@ class Genero(models.Model):
         """ String representando o modelo do objeto """
         return self.nome
 
+    def get_absolute_url(self):
+        """ Retorna uma URL para acessar os detalhes de um diretor """
+        return reverse('genero-info', args = [str(self.id)])
+
 
 class Filme(models.Model):
     """ Este modelo represeta um filme que pode ser alugado """
@@ -70,7 +74,7 @@ class FilmeInstancia(models.Model):
 
     def __str__(self):
         """ String representando o modelo do objeto """
-        return f"{self.id} ({self.book.titulo})"
+        return f"{self.id} ({self.filme.titulo})"
 
 class Diretor(models.Model):
     """ Este modelo represente um diretor de um filme """
