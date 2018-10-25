@@ -13,13 +13,13 @@
             </tr>
             </thead>
             <tbody>
-                  {% for filme in filmeEscolhido %}
+                  {% if filme_escolhido %}
                     <tr>
-                        <td>{{ filme.titulo }}</td>
+                        <td>{{ filme_escolhido.titulo }}</td>
                         <td>5,00</td>
                         
                     </tr>
-                  {% endfor %}
+                  {% endif %}
 
             </tbody>
             <tbody>
@@ -56,7 +56,7 @@
 
                         <input type="date" id="id_data_vencimento" name="data_vencimento" class="form-control" placeholder="Data de Vencimento" required>
 
-                        <input type="number" id="id_csc" name="csc" class="form-control" placeholder="CSC">
+                        <input type="number" id="id_csc" name="csc" class="form-control" placeholder="CSC" required>
 
                         <font color="green">Selecione o tipo de cartão</font></br>
                         <select name="tipo_cartao" form="form-control" placeholder="Tipo de Cartão" required>
