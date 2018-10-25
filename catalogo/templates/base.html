@@ -16,9 +16,21 @@
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'filmes' %}">Todos os Filmes</a></li>
-          <li><a href="{% url 'diretores' %}">Todos os diretores</a></li>
-          <li><a href="{% url 'generos' %}">Todos os gêneros</a></li>
+        
+        <hr>
+
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'filmes' %}">Filmes</a></li>
+          <li><a href="{% url 'diretores' %}">Diretores</a></li>
+          <li><a href="{% url 'generos' %}">Gêneros</a></li>  
+         
+        <hr>
+          <li>User: {{ user.get_username }}</li>
+          <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+        {% else %}
+          <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+        {% endif %} 
+        
         </ul>
      {% endblock %}
       </div>

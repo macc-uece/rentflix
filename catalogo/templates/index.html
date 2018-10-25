@@ -1,26 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>AluguelFilmes Home</h1>
-  <p>Bem-Vindo ao AluguelFilmes online, um website desenvolvido para facilitar sua vida</p>
+  <h1>Bem vindo ao RentFlix</h1>
+  <p>Um website desenvolvido para aluguel de filmes.</p>
   <h2>Catálogo</h2>
   <ul>
     <li><strong>Filmes:</strong> {{ num_filmes }}</li>
-    <li><strong>Filmes disponíveis:</strong> {{ num_instancias_disponiveis }}</li>
+    <li><strong>Filmes Disponíveis:</strong> {{ num_instancias_disponiveis }}</li>
     <li><strong>Diretores:</strong> {{ num_diretores }}</li>
   </ul>
-  <h1>Lista de Filmes Disponíveis</h1>
+  <h2>Em destaque:</h2>
 
-    <ul>
+  {% for filme_instancia in filmes_disponiveis %}
+    <div> 
+      <a href="{{ filme_instancia.filme.get_absolute_url }}">
+       <img src="/media/{{ filme_instancia.filme.poster }}" alt="poster" width=200 height=auto />
+      </a>
+    </div>
+  {% endfor %}
 
-      {% for filme in filmesDisponiveis %}
-
-		      <li>
-		        <a href="{{ filme.get_absolute_url }}">{{ filme.filme }}</a>
-		        <a href="{% url 'pagar' %}" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
-		      </li>
-		   
-      {% endfor %}
-
-    </ul>
 {% endblock %}

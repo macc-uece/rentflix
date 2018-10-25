@@ -37,19 +37,11 @@
     </div>
     <font color="red">Digite os seus dados do cartão de crédito para confirmação de aluguel:</font>
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-      <script type="text/javascript">
-        function validation(){
-
-            alert("Filme alugado!");
-        }
-
-    </script>
-        <table class="table">
-            
+       <table class="table">            
             <tbody>
-                
+        
                     <tr>
-                        <td><a class="btn btn-lg btn-primary" href="{% url 'index' %}" style="width: 100px; height: 50px" onclick="validation()">Pagar</a></td>
+                        <td><a class="btn btn-lg btn-primary" href="{% url 'pagar' filme_id=filme_escolhido.id %}" style="width: 100px; height: 50px">Pagar</a></td>
                         
 
                     </tr>

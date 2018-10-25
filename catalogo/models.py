@@ -109,13 +109,5 @@ class HistoricoAluguel(models.Model):
         blank = True,
         default = 'm'
     )
-
-    def alugarFilme(self, filmeAlugado_id):
-        filmeAlugado = FilmeInstancia.objects.get(id=filmeAlugado_id)
-        filmeAlugado.status='e'
-        filmeAlugado.save()
-        historico = HistoricoAluguel(id=filmeAlugado_id, filme=filmeAlugado.filme, usuario=self, data_devolucao=filmeAlugado.data_devolucao)
-        historico.save()
-
-
+ 
     

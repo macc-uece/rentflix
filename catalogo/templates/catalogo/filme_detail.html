@@ -6,17 +6,19 @@
 
 <p><strong>Diretor:</strong> <a href="{% url 'diretor-info' filme.diretor.pk %}">{{ filme.diretor }}</a></p>
 <p><strong>Sinopse:</strong> {{ filme.sinopse }}</p>
-<p><strong>Poster:</strong> {{ filme.poster }}</p> 
-<p><strong>Genero:</strong> {% for genero in filme.genero.all %}{{genero}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
+<img src="/media/{{ filme.poster }}" alt="poster" width=200 height=auto/>
+<p><strong>Gênero:</strong> {% for genero in filme.genero.all %}{{genero}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
 <div style="margin-left:20px;margin-top:20px">
 	<h4>Filme</h4>
 
 	{% for filme in filme.filmeinstancia_set.all %}
 	<hr>
 	<p class="{% if filme.status == 'd' %}text-success{% elif filme.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ filme.get_status_display }}</p>
-	{% if filme.status != 'd' %}<p><strong>Deve ser devolvido:</strong> {{filme.due_back}}</p>{% endif %}
-	<p><strong>Imprint:</strong> {{filme.imprint}}</p>
-	<p class="text-muted"><strong>Id:</strong> {{filme.id}}</p>
+	{% if filme.status != 'd' %}
+      <p><strong>Deve ser devolvido:</strong> {{filme.data_devolucao}}</p>
+    {% else %}
+       <a href="{% url 'alugar' filme_id=filme.filme.id %}" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
+    {% endif %}
 
 	{% endfor %}
 </div>
