@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalogo.models import Filme, Genero, FilmeInstancia, Diretor 
+from catalogo.models import Filme, Genero, FilmeInstancia, Diretor, HistoricoAluguel
 
 
 @admin.register(Filme)
@@ -13,3 +13,4 @@ class FilmeInstanciaAdmin(admin.ModelAdmin):
 
 admin.site.register(Genero)
 admin.site.register(Diretor)
+admin.site.register(HistoricoAluguel)

@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from catalogo.models import Filme, Diretor, FilmeInstancia, Genero
+from catalogo.models import Filme, Diretor, FilmeInstancia, Genero, HistoricoAluguel
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from datetime import date
 
 
 @login_required
@@ -44,14 +45,22 @@ def alugar(request, filme_id):
 def pagar(request, filme_id):
     filme_alugado = Filme.objects.get(id__exact=filme_id)
     filme_instancia = FilmeInstancia.objects.get(filme__exact=filme_alugado)
+    data_atual = date.today()
+    data_devolucao = date.fromordinal(data_atual.toordinal()+7)
+    username_logado = get_perfil_logado(request)
     
     filme_instancia.status = 'e'
+    filme_instancia.data_devolucao = data_devolucao
     filme_instancia.save()
     
-    #historico = HistoricoAluguel(id=filme_alugado.id, filme=filme_alugado.filme, usuario=self, data_devolucao=filme_alugado.data_devolucao)
-    #historico.save()
+    historico = HistoricoAluguel(id=filme_instancia.id, filme=filme_instancia.filme, usuario=username_logado, 
+        data_devolucao=data_devolucao, status=filme_instancia.status)
+    historico.save()
     return redirect('index')
 
+@login_required
+def get_perfil_logado(request):
+    return request.user.username
 
 class FilmeListView(LoginRequiredMixin, generic.ListView):
     """
