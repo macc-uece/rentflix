@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
 
 
+
 @login_required
 def index(request):
 
@@ -33,6 +34,29 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 @login_required
+def detail_diretor(request, diretor_nome):
+    diretor_escolhido = Diretor.objects.get(nome__exact=diretor_nome)
+    filmes_dirigidos = Filme.objects.all().filter(diretor__exact=diretor_escolhido)
+    context = {   
+        'diretor_escolhido': diretor_escolhido,
+        'filmes_dirigidos' : filmes_dirigidos,
+        'diretor_nome': diretor_nome,
+    }   
+    return render(request, 'catalogo/diretor_detail.html', context=context)
+
+@login_required
+def detail_genero(request, genero_nome):
+    genero_escolhido = Genero.objects.get(nome__exact=genero_nome)
+    filmes_relacionados = Filme.objects.all().filter(genero__exact=genero_escolhido)
+    context = {   
+        'genero_escolhido': genero_escolhido,
+        'filmes_relacionados' : filmes_relacionados,
+        'genero_nome': genero_nome,
+    }   
+    return render(request, 'catalogo/genero_detail.html', context=context)
+
+
+@login_required
 def alugar(request, filme_id):
     filme_escolhido = Filme.objects.all().filter(id__exact=filme_id)[0]
     context = {   
@@ -49,7 +73,7 @@ def pagar(request, filme_id):
     data_devolucao = date.fromordinal(data_atual.toordinal()+7)
     username_logado = get_perfil_logado(request)
     
-    filme_instancia.status = 'e'
+    filme_instancia.status = 'd'
     filme_instancia.data_devolucao = data_devolucao
     filme_instancia.save()
     

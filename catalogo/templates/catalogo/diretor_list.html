@@ -8,7 +8,7 @@
 
       {% for diretor in diretor_list %}
       <li>
-        <a href="{{ diretor.get_absolute_url }}">{{ diretor.nome }}</a>
+        <a href="{% url 'detail_diretor' diretor_nome=diretor.nome %}">{{ diretor.nome }}</a>
       </li>
       {% endfor %}
 

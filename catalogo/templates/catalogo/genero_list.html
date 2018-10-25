@@ -8,7 +8,7 @@
 
       {% for genero in genero_list %}
       <li>
-        <a href="{{ genero.get_absolute_url }}">{{ genero.nome }}</a>
+        <a href="{% url 'detail_genero' genero_nome=genero.nome %}">{{ genero.nome }}</a>
       </li>
       {% endfor %}
 

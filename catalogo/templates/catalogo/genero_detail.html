@@ -2,12 +2,21 @@
 
 {% block content %}
 
-<h1>Gênero: {{ genero.nome }}</h1>
+<h1>Gênero: {{ genero_nome }}</h1>
 
-<h4>Filmes desse gênero</h4>
+<h4>Filmes deste gênero: </h4>
 
-	<ul>
-
-
-  </ul>
+	<div class="container">
+        <div class="row">
+            {% for filme_instancia in filmes_relacionados %}
+                  <div class="col-md-3" >
+                      <div class="card"  style="height: 200px; width: 200px;">
+                          <a href="{{ filme_instancia.get_absolute_url }}">
+                           <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=250/>
+                          </a>
+                      </div>
+                  </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
