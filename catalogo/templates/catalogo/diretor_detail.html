@@ -10,13 +10,12 @@
         <div class="row">
             {% for filme_instancia in filmes_dirigidos %}
                   <div class="col-md-3" >
-                      <div class="card"  style="height: 200px; width: 200px;">
                           <a href="{{ filme_instancia.get_absolute_url }}">
-                           <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=250/>
+                           <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto/>
                           </a>
-                      </div>
                   </div>
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}
