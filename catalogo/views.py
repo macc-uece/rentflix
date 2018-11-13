@@ -67,12 +67,17 @@ def alugar(request, filme_id):
 @login_required
 def pesquisar(request):
     filmesPesquisados = request.GET.get('palavra')
-    list_filme_titulo = Filme.objects.all().filter(titulo__exact=filmesPesquisados)
-    context = {   
-        'list_filme_titulo' : list_filme_titulo,
+    filmes_disponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
+    opcao_filme = request.GET.get('Filme')
 
-    }   
-    return render(request, 'pesquisados.html', context=context)
+    if opcao_filme == "on":
+        list_filme_titulo = Filme.objects.all().filter(titulo__contains=filmesPesquisados)
+        context = {   
+            'list_filme_titulo' : list_filme_titulo,
+
+        }   
+        return render(request, 'pesquisados.html', context=context)
+    return render(request, 'pesquisados.html')
     
 
 @login_required
