@@ -69,11 +69,20 @@ def pesquisar(request):
     filmesPesquisados = request.GET.get('palavra')
     filmes_disponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
     opcao_filme = request.GET.get('Filme')
+    opcao_genero = request.GET.get('Genero')
 
     if opcao_filme == "on":
         list_filme_titulo = Filme.objects.all().filter(titulo__contains=filmesPesquisados)
         context = {   
             'list_filme_titulo' : list_filme_titulo,
+
+        }   
+        return render(request, 'pesquisados.html', context=context)
+
+    if opcao_genero == "on":
+        list_filme_genero = Filme.objects.all().filter(genero__nome__contains=filmesPesquisados)
+        context = {   
+            'list_filme_genero' : list_filme_genero,
 
         }   
         return render(request, 'pesquisados.html', context=context)
