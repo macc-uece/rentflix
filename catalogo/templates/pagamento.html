@@ -36,8 +36,8 @@
         </table>
     </div>
     <font color="red">Digite os seus dados do cartão de crédito para confirmação de aluguel:</font>
-    <form class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-        <img src="https://icon-icons.com/icons2/1186/PNG/512/1490135017-visa_82256.png"  width="50" height="50">
+    <form class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto" method="GET" action="{% url 'pagar' filme_id=filme_escolhido.id %}">
+        <img src="https://www.visa.com.br/parceiros-visa/informacoes-para-parceiros/informacoes-para-pequenos-negocios/_jcr_content/par/cardstack_a448/cardStackColumn1/image.img.jpg/1461353794723.jpg"  width="50" height="30">
         
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTwefv8HLieiB5YqOf3CyO34lda1wMNkgJHM2S7tH4AtQjv114"  width="50" height="40">
         
@@ -47,11 +47,11 @@
                         
         <img src="https://seeklogo.com/images/E/elo-logo-CD2DA41300-seeklogo.com.png"  width="30" height="30"></br>
 
-        <input type="number" id="id_cartao_numero" name="cartao_numero" class="form-control" placeholder="Número do Cartão" required autofocus>
+        <input type="number" class="form-control" id="id_cartao_numero" name="cartao_numero" value="{{request.GET.cartao_numero}}" placeholder="Número do Cartão" required autofocus>
 
-        <input type="date" id="id_data_vencimento" name="data_vencimento" class="form-control" placeholder="Data de Vencimento" required>
+        <input type="date" class="form-control" id="id_data_vencimento" name="data_vencimento" value="{{request.GET.cartao_numero}}" placeholder="Data de Vencimento" required autofocus>
 
-        <input type="number" id="id_csc" name="csc" class="form-control" placeholder="CSC" required>
+        <input type="number" class="form-control" id="id_csc" name="csc" value="{{request.GET.cartao_numero}}" placeholder="CSC" required autofocus>
 
         <font color="green">Selecione o tipo de cartão</font></br>
         <select name="tipo_cartao" form="form-control" placeholder="Tipo de Cartão" required>
@@ -68,7 +68,7 @@
             <option value="na_locadora">Não</option>
         </select></br></br>
         
-        <a class="btn btn-lg btn-primary" href="{% url 'pagar' filme_id=filme_escolhido.id %}" style="width: 100px; height: 50px">Pagar</a>
+        <input class="btn btn-primary btn-lg" type="submit">
         
        
     </form>
