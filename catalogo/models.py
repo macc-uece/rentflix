@@ -95,6 +95,7 @@ class HistoricoAluguel(models.Model):
     filme = models.ForeignKey('Filme', on_delete = models.SET_NULL, null = True)
     usuario = models.CharField(max_length = 200)
     data_devolucao = models.DateField(null = True, blank = True)
+    data_aluguel = models.DateField(null = True, blank = True)
 
     STATUS_EMPRESTIMO = (
         ('m', 'Manutenção'),

@@ -121,7 +121,7 @@ def pagar(request, filme_id):
     filme_instancia.save()
     
     historico = HistoricoAluguel(id=filme_instancia.id, filme=filme_instancia.filme, usuario=username_logado, 
-        data_devolucao=data_devolucao, status=filme_instancia.status)
+        data_devolucao=data_devolucao, data_aluguel=data_atual, status=filme_instancia.status)
     historico.save()
     return redirect('index')
 
