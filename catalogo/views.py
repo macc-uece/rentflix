@@ -70,22 +70,41 @@ def pesquisar(request):
     filmes_disponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
     opcao_filme = request.GET.get('Filme')
     opcao_genero = request.GET.get('Genero')
+    opcao_diretor = request.GET.get('Diretor')
 
     if opcao_filme == "on":
+        opcao = 'Filme'
         list_filme_titulo = Filme.objects.all().filter(titulo__contains=filmesPesquisados)
         context = {   
             'list_filme_titulo' : list_filme_titulo,
+            'filmesPesquisados' : filmesPesquisados,
+            'opcao' : opcao
 
         }   
         return render(request, 'pesquisados.html', context=context)
 
     if opcao_genero == "on":
+        opcao = 'Genero'
         list_filme_genero = Filme.objects.all().filter(genero__nome__contains=filmesPesquisados)
         context = {   
             'list_filme_genero' : list_filme_genero,
+            'filmesPesquisados' : filmesPesquisados,
+            'opcao' : opcao
 
         }   
         return render(request, 'pesquisados.html', context=context)
+
+    if opcao_diretor == "on":
+        opcao = 'Diretor'
+        list_filme_diretor = Filme.objects.all().filter(diretor__nome__contains=filmesPesquisados)
+        context = {   
+            'list_filme_diretor' : list_filme_diretor,
+            'filmesPesquisados' : filmesPesquisados,
+            'opcao' : opcao
+
+        }   
+        return render(request, 'pesquisados.html', context=context)
+
     return render(request, 'pesquisados.html')
     
 
