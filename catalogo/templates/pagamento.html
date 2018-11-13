@@ -36,7 +36,7 @@
         </table>
     </div>
     <font color="red">Digite os seus dados do cartão de crédito para confirmação de aluguel:</font>
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+    <form class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
         <img src="https://icon-icons.com/icons2/1186/PNG/512/1490135017-visa_82256.png"  width="50" height="50">
         
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTwefv8HLieiB5YqOf3CyO34lda1wMNkgJHM2S7tH4AtQjv114"  width="50" height="40">
@@ -69,6 +69,7 @@
         </select></br></br>
         
         <a class="btn btn-lg btn-primary" href="{% url 'pagar' filme_id=filme_escolhido.id %}" style="width: 100px; height: 50px">Pagar</a>
+        
        
-    </div>
+    </form>
 {% endblock %}

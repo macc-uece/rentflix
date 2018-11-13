@@ -12,5 +12,7 @@ urlpatterns = [
    path('genero/<genero_nome>', views.detail_genero, name='detail_genero'),
    path('genero/<int:pk>', views.GeneroDetailView.as_view(), name='genero-info'),
    path('alugar/<int:filme_id>', views.alugar, name='alugar'), 
-   path('pagar/<int:filme_id>', views.pagar, name='pagar'), 
+   path('pagar/<int:filme_id>', views.pagar, name='pagar'),
+   path('pesquisar/>', views.pesquisar, name='pesquisar'),
+
 ]

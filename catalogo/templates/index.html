@@ -9,6 +9,16 @@
     <li><strong>Filmes Disponíveis:</strong> {{ num_instancias_disponiveis }}</li>
     <li><strong>Diretores:</strong> {{ num_diretores }}</li>
   </ul>
+ <form method="GET" action="{% url 'pesquisar'  %}">
+    <div class="form-group">
+          <input type="text" class="form-control" id="palavra" name="palavra" value="{{request.GET.filmeNome}}" placeholder="pesquisar" required autofocus><br/>
+          Filme <input type="radio" name="Filme"/>
+          Diretor <input type="radio" name="Diretor" />
+          Gênero <input type="radio" name="Genero" %}"/><br/>
+          <input class="btn btn-primary btn-lg" type="submit">
+    </div>
+  </form>
+  
   <h2>Em destaque:</h2>
 
     <div class="container">

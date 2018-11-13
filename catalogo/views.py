@@ -64,6 +64,16 @@ def alugar(request, filme_id):
     }   
     return render(request, 'pagamento.html', context=context)
 
+@login_required
+def pesquisar(request):
+    filmesPesquisados = request.GET.get('palavra')
+    list_filme_titulo = Filme.objects.all().filter(titulo__exact=filmesPesquisados)
+    context = {   
+        'list_filme_titulo' : list_filme_titulo,
+
+    }   
+    return render(request, 'pesquisados.html', context=context)
+    
 
 @login_required
 def pagar(request, filme_id):
@@ -73,7 +83,7 @@ def pagar(request, filme_id):
     data_devolucao = date.fromordinal(data_atual.toordinal()+7)
     username_logado = get_perfil_logado(request)
     
-    filme_instancia.status = 'd'
+    filme_instancia.status = 'e'
     filme_instancia.data_devolucao = data_devolucao
     filme_instancia.save()
     

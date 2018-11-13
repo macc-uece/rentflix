@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Bem vindo ao RentFlix</h1>
+  <p>Um website desenvolvido para aluguel de filmes.</p>
+  <h2>Catálogo</h2>
+  <form method="GET" action="{% url 'pesquisar'  %}">
+    <div class="form-group">
+          <input type="text" class="form-control" id="palavra" name="palavra" value="{{request.GET.filmeNome}}" placeholder="pesquisar" required autofocus><br/>
+          Filme <input type="radio" name="Filme"/>
+          Autor <input type="radio" name="Autor" />
+          Gênero <input type="radio" name="Genero" /><br/>
+          <input class="btn btn-primary btn-lg" type="submit">
+    </div>
+  </form>
+  
+  <h2>Resultado da Busca:</h2>
+
+    <div class="container">
+        <div class="row">
+          {% if list_filme_titulo %}
+              {% for filme_instancia in list_filme_titulo %}
+                  <div class="col-md-3" >
+                          <a href="{{ filme_instancia.get_absolute_url }}">
+                           <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
+                          </a>
+                  </div>
+              {% endfor %}
+          {% else %}
+            {% if list_filme_diretor %}
+              {% for filme_instancia in list_filme_diretor %}
+                  <div class="col-md-3" >
+                          <a href="{{ filme_instancia.get_absolute_url }}">
+                           <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
+                          </a>
+                  </div>
+              {% endfor %}
+            {% else %}
+              {% if list_filme_genero %}
+                {% for filme_instancia in list_filme_genero %}
+                    <div class="col-md-3" >
+                            <a href="{{ filme_instancia.get_absolute_url }}">
+                             <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
+                            </a>
+                    </div>
+                {% endfor %}
+              {% else %}
+                <p>Nenhum resultado encontrado</p>
+              {% endif %}
+            {% endif %}  
+          {% endif %} 
+        </div>
+    </div>
+
+{% endblock %}
