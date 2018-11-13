@@ -68,12 +68,9 @@ def alugar(request, filme_id):
 def pesquisar(request):
     filmesPesquisados = request.GET.get('palavra')
     filmes_disponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
-    opcao_filme = request.GET.get('Filme')
-    opcao_genero = request.GET.get('Genero')
-    opcao_diretor = request.GET.get('Diretor')
+    opcao = request.GET.get('opcao')
 
-    if opcao_filme == "on":
-        opcao = 'Filme'
+    if opcao == "Filme":
         list_filme_titulo = Filme.objects.all().filter(titulo__contains=filmesPesquisados)
         context = {   
             'list_filme_titulo' : list_filme_titulo,
@@ -83,8 +80,7 @@ def pesquisar(request):
         }   
         return render(request, 'pesquisados.html', context=context)
 
-    if opcao_genero == "on":
-        opcao = 'Genero'
+    if opcao == "Genero":
         list_filme_genero = Filme.objects.all().filter(genero__nome__contains=filmesPesquisados)
         context = {   
             'list_filme_genero' : list_filme_genero,
@@ -94,8 +90,7 @@ def pesquisar(request):
         }   
         return render(request, 'pesquisados.html', context=context)
 
-    if opcao_diretor == "on":
-        opcao = 'Diretor'
+    if opcao == "Diretor":
         list_filme_diretor = Filme.objects.all().filter(diretor__nome__contains=filmesPesquisados)
         context = {   
             'list_filme_diretor' : list_filme_diretor,

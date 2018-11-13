@@ -12,9 +12,9 @@
  <form method="GET" action="{% url 'pesquisar'  %}">
     <div class="form-group">
           <input type="text" class="form-control" id="palavra" name="palavra" value="{{request.GET.palavra}}" placeholder="pesquisar" required autofocus><br/>
-          <input type="radio" name="Filme" value="on"/> Filme 
-          <input type="radio" name="Diretor" value="on"/> Diretor 
-          <input type="radio" name="Genero" value="on"/> Gênero<br/>  
+          <input type="radio" name="opcao" value="Filme"/> Filme 
+          <input type="radio" name="opcao" value="Diretor"/> Diretor 
+          <input type="radio" name="opcao" value="Genero"/> Gênero<br/>  
           <input class="btn btn-primary btn-lg" type="submit">
     </div>
   </form>
