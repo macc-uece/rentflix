@@ -1,0 +1,126 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLOWED_HOSTS	rentflix/settings.py	/^ALLOWED_HOSTS = []$/;"	v
+AUTH_PASSWORD_VALIDATORS	rentflix/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	v
+BASE_DIR	rentflix/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	v
+CatalogoConfig	catalogo/apps.py	/^class CatalogoConfig(AppConfig):$/;"	c
+DATABASES	rentflix/settings.py	/^DATABASES = {$/;"	v
+DEBUG	rentflix/settings.py	/^DEBUG = True$/;"	v
+Diretor	catalogo/models.py	/^class Diretor(models.Model):$/;"	c
+DiretorDetailView	catalogo/views.py	/^class DiretorDetailView(LoginRequiredMixin, generic.DetailView):$/;"	c
+DiretorListView	catalogo/views.py	/^class DiretorListView(LoginRequiredMixin, generic.ListView):$/;"	c
+Filme	catalogo/models.py	/^class Filme(models.Model):$/;"	c
+FilmeAdmin	catalogo/admin.py	/^class FilmeAdmin(admin.ModelAdmin):$/;"	c
+FilmeDetailView	catalogo/views.py	/^class FilmeDetailView(LoginRequiredMixin, generic.DetailView):$/;"	c
+FilmeInstancia	catalogo/models.py	/^class FilmeInstancia(models.Model):$/;"	c
+FilmeInstanciaAdmin	catalogo/admin.py	/^class FilmeInstanciaAdmin(admin.ModelAdmin):$/;"	c
+FilmeListView	catalogo/views.py	/^class FilmeListView(LoginRequiredMixin, generic.ListView):$/;"	c
+Genero	catalogo/models.py	/^class Genero(models.Model):$/;"	c
+GeneroDetailView	catalogo/views.py	/^class GeneroDetailView(LoginRequiredMixin, generic.DetailView):$/;"	c
+GeneroListView	catalogo/views.py	/^class GeneroListView(LoginRequiredMixin, generic.ListView):$/;"	c
+HistoricoAluguel	catalogo/models.py	/^class HistoricoAluguel(models.Model):$/;"	c
+INSTALLED_APPS	rentflix/settings.py	/^INSTALLED_APPS = [$/;"	v
+LANGUAGE_CODE	rentflix/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	v
+LOGIN_REDIRECT_URL	rentflix/settings.py	/^LOGIN_REDIRECT_URL = '\/'$/;"	v
+MEDIA_ROOT	rentflix/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	v
+MEDIA_URL	rentflix/settings.py	/^MEDIA_URL = '\/media\/'$/;"	v
+MIDDLEWARE	rentflix/settings.py	/^MIDDLEWARE = [$/;"	v
+Meta	catalogo/models.py	/^    class Meta:$/;"	c	class:FilmeInstancia
+Migration	catalogo/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	c
+NaiveTestCase	catalogo/tests/test_models.py	/^class NaiveTestCase(TestCase):$/;"	c
+ROOT_URLCONF	rentflix/settings.py	/^ROOT_URLCONF = 'rentflix.urls'$/;"	v
+STATIC_URL	rentflix/settings.py	/^STATIC_URL = '\/static\/'$/;"	v
+STATUS_EMPRESTIMO	catalogo/models.py	/^    STATUS_EMPRESTIMO = ($/;"	v	class:FilmeInstancia
+STATUS_EMPRESTIMO	catalogo/models.py	/^    STATUS_EMPRESTIMO = ($/;"	v	class:HistoricoAluguel
+TEMPLATES	rentflix/settings.py	/^TEMPLATES = [$/;"	v
+TIME_ZONE	rentflix/settings.py	/^TIME_ZONE = 'America\/Fortaleza'$/;"	v
+USE_I18N	rentflix/settings.py	/^USE_I18N = True$/;"	v
+USE_L10N	rentflix/settings.py	/^USE_L10N = True$/;"	v
+USE_TZ	rentflix/settings.py	/^USE_TZ = True$/;"	v
+WSGI_APPLICATION	rentflix/settings.py	/^WSGI_APPLICATION = 'rentflix.wsgi.application'$/;"	v
+__str__	catalogo/models.py	/^    def __str__(self):$/;"	m	class:Diretor	file:
+__str__	catalogo/models.py	/^    def __str__(self):$/;"	m	class:Filme	file:
+__str__	catalogo/models.py	/^    def __str__(self):$/;"	m	class:FilmeInstancia	file:
+__str__	catalogo/models.py	/^    def __str__(self):$/;"	m	class:Genero	file:
+alugar	catalogo/views.py	/^def alugar(request, filme_titulo):$/;"	f
+application	rentflix/wsgi.py	/^application = get_wsgi_application()$/;"	v
+blank	catalogo/models.py	/^        blank = True,$/;"	v	class:FilmeInstancia
+blank	catalogo/models.py	/^        blank = True,$/;"	v	class:HistoricoAluguel
+choices	catalogo/models.py	/^        choices = STATUS_EMPRESTIMO,$/;"	v	class:FilmeInstancia
+choices	catalogo/models.py	/^        choices = STATUS_EMPRESTIMO,$/;"	v	class:HistoricoAluguel
+data_devolucao	catalogo/models.py	/^    data_devolucao = models.DateField(null = True, blank = True)$/;"	v	class:FilmeInstancia
+data_devolucao	catalogo/models.py	/^    data_devolucao = models.DateField(null = True, blank = True)$/;"	v	class:HistoricoAluguel
+default	catalogo/models.py	/^        default = 'm'$/;"	v	class:HistoricoAluguel
+default	catalogo/models.py	/^        default = 'm',$/;"	v	class:FilmeInstancia
+dependencies	catalogo/migrations/0001_initial.py	/^    dependencies = [$/;"	v	class:Migration
+diretor	catalogo/models.py	/^    diretor = models.ForeignKey('Diretor', on_delete = models.SET_NULL, null =$/;"	v	class:Filme
+display_genero	catalogo/models.py	/^    def display_genero(self):$/;"	m	class:Filme
+field	catalogo/migrations/0001_initial.py	/^            field=models.ManyToManyField(help_text='Escolha um gênero                                         para esse filme.', to='catalogo.Genero'),$/;"	v	class:Migration
+fields	catalogo/migrations/0001_initial.py	/^            fields=[$/;"	v	class:Migration
+filme	catalogo/models.py	/^    filme = models.ForeignKey('Filme', on_delete = models.SET_NULL, null = True)$/;"	v	class:FilmeInstancia
+filme	catalogo/models.py	/^    filme = models.ForeignKey('Filme', on_delete = models.SET_NULL, null = True)$/;"	v	class:HistoricoAluguel
+genero	catalogo/models.py	/^                                        para esse filme.')$/;"	v	class:Filme
+get_absolute_url	catalogo/models.py	/^    def get_absolute_url(self):$/;"	m	class:Diretor
+get_absolute_url	catalogo/models.py	/^    def get_absolute_url(self):$/;"	m	class:Filme
+get_absolute_url	catalogo/models.py	/^    def get_absolute_url(self):$/;"	m	class:Genero
+get_perfil_logado	catalogo/views.py	/^def get_perfil_logado(request):$/;"	f
+help_text	catalogo/models.py	/^        help_text = 'Status do Filme'$/;"	v	class:FilmeInstancia
+id	catalogo/models.py	/^    id = models.UUIDField(primary_key = True, default = 'uuid.uuid')$/;"	v	class:HistoricoAluguel
+id	catalogo/models.py	/^    id = models.UUIDField(primary_key = True, default = uuid.uuid4, help_text =$/;"	v	class:FilmeInstancia
+index	catalogo/views.py	/^def index(request):$/;"	f
+initial	catalogo/migrations/0001_initial.py	/^    initial = True$/;"	v	class:Migration
+list_diplay	catalogo/admin.py	/^    list_diplay = ('id', 'filme', 'data_devolucao', 'status')$/;"	v	class:FilmeInstanciaAdmin
+list_diplay	catalogo/admin.py	/^    list_diplay = ('titulo', 'diretor', 'display_genero')$/;"	v	class:FilmeAdmin
+list_filter	catalogo/admin.py	/^    list_filter = ('status', 'data_devolucao')$/;"	v	class:FilmeInstanciaAdmin
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:DiretorDetailView
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:DiretorListView
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:FilmeDetailView
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:FilmeListView
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:GeneroDetailView
+login_url	catalogo/views.py	/^    login_url = '\/login\/'$/;"	v	class:GeneroListView
+max_length	catalogo/models.py	/^        max_length = 1,$/;"	v	class:FilmeInstancia
+max_length	catalogo/models.py	/^        max_length = 1,$/;"	v	class:HistoricoAluguel
+model	catalogo/views.py	/^    model = Diretor$/;"	v	class:DiretorDetailView
+model	catalogo/views.py	/^    model = Diretor$/;"	v	class:DiretorListView
+model	catalogo/views.py	/^    model = Filme$/;"	v	class:FilmeDetailView
+model	catalogo/views.py	/^    model = Filme$/;"	v	class:FilmeListView
+model	catalogo/views.py	/^    model = Genero$/;"	v	class:GeneroDetailView
+model	catalogo/views.py	/^    model = Genero$/;"	v	class:GeneroListView
+model_name	catalogo/migrations/0001_initial.py	/^            model_name='filme',$/;"	v	class:Migration
+name	catalogo/apps.py	/^    name = 'catalogo'$/;"	v	class:CatalogoConfig
+name	catalogo/migrations/0001_initial.py	/^            name='Diretor',$/;"	v	class:Migration
+name	catalogo/migrations/0001_initial.py	/^            name='Filme',$/;"	v	class:Migration
+name	catalogo/migrations/0001_initial.py	/^            name='FilmeInstancia',$/;"	v	class:Migration
+name	catalogo/migrations/0001_initial.py	/^            name='Genero',$/;"	v	class:Migration
+name	catalogo/migrations/0001_initial.py	/^            name='genero',$/;"	v	class:Migration
+nome	catalogo/models.py	/^                                        de um filme (i.e Ação)")$/;"	v	class:Genero
+nome	catalogo/models.py	/^    nome = models.CharField(max_length = 200)$/;"	v	class:Diretor
+operations	catalogo/migrations/0001_initial.py	/^    operations = [$/;"	v	class:Migration
+options	catalogo/migrations/0001_initial.py	/^            options={$/;"	v	class:Migration
+ordering	catalogo/models.py	/^        ordering = ['data_devolucao']$/;"	v	class:FilmeInstancia.Meta
+pagar	catalogo/views.py	/^def pagar(request):$/;"	f
+paginate_by	catalogo/views.py	/^    paginate_by = 10 $/;"	v	class:DiretorListView
+paginate_by	catalogo/views.py	/^    paginate_by = 10 $/;"	v	class:GeneroListView
+paginate_by	catalogo/views.py	/^    paginate_by = 10$/;"	v	class:FilmeListView
+poster	catalogo/models.py	/^    poster = models.ImageField(upload_to = 'posters\/')$/;"	v	class:Filme
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:DiretorDetailView
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:DiretorListView
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:FilmeDetailView
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:FilmeListView
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:GeneroDetailView
+redirect_field_name	catalogo/views.py	/^    redirect_field_name = 'redirect_to'$/;"	v	class:GeneroListView
+setUp	catalogo/tests/test_models.py	/^    def setUp(self):$/;"	m	class:NaiveTestCase
+sinopse	catalogo/models.py	/^                                        pequeno sumário sobre o filme.')$/;"	v	class:Filme
+status	catalogo/models.py	/^    status = models.CharField($/;"	v	class:FilmeInstancia
+status	catalogo/models.py	/^    status = models.CharField($/;"	v	class:HistoricoAluguel
+tearDown	catalogo/tests/test_models.py	/^    def tearDown(self):$/;"	m	class:NaiveTestCase
+test_naive	catalogo/tests/test_models.py	/^    def test_naive(self):$/;"	m	class:NaiveTestCase
+titulo	catalogo/models.py	/^    titulo = models.CharField(max_length = 200)$/;"	v	class:Filme
+urlpatterns	catalogo/urls.py	/^urlpatterns = [$/;"	v
+urlpatterns	rentflix/urls.py	/^urlpatterns = [$/;"	v
+usuario	catalogo/models.py	/^    usuario = models.CharField(max_length = 200)$/;"	v	class:HistoricoAluguel
+validation	catalogo/templates/pagamento.html	/^        function validation(){$/;"	f
