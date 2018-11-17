@@ -102,7 +102,13 @@ def pesquisar(request):
 
     return render(request, 'pesquisados.html')
     
+@login_required
+def avaliar(request):
+    avaliacao = request.GET.get('star')
 
+
+    return redirect('filmes')
+    
 @login_required
 def pagar(request, filme_id):
     filme_alugado = Filme.objects.get(id__exact=filme_id)
