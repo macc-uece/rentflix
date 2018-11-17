@@ -10,7 +10,7 @@
           <input type="radio" name="opcao" value="Filme"/> Filme 
           <input type="radio" name="opcao" value="Diretor"/> Diretor 
           <input type="radio" name="opcao" value="Genero"/> Gênero<br/>  
-          <input class="btn btn-primary btn-lg" type="submit">
+          <button class="btn btn-primary btn-lg" type="submit">Pesquisar</button>
     </div>
   </form>
   
@@ -30,6 +30,7 @@
             {% if list_filme_diretor %}
               {% for filme_instancia in list_filme_diretor %}
                   <div class="col-md-3" >
+                          <div>{{ filme_instancia.diretor}}</div>
                           <a href="{{ filme_instancia.get_absolute_url }}">
                            <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
                           </a>
@@ -39,6 +40,7 @@
               {% if list_filme_genero %}
                 {% for filme_instancia in list_filme_genero %}
                     <div class="col-md-3" >
+                            <div>{% for genero in filme_instancia.genero.all %}{{genero}}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
                             <a href="{{ filme_instancia.get_absolute_url }}">
                              <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
                             </a>
