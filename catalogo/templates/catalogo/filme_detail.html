@@ -82,25 +82,89 @@
 	}
 	</style>
 
-	{% for filme in filme.filmeinstancia_set.all %}
-	
 	<h1>Classificação</h1>
 	<div class="stars">
-	<form method="GET" action="{% url 'avaliar'  %}">
-	  <input class="star star-5" id="star-5" type="radio" name="star"/>
-	  <label class="star star-5" for="star-5"></label>
-	  <input class="star star-4" id="star-4" type="radio" name="star"/>
-	  <label class="star star-4" for="star-4"></label>
-	  <input class="star star-3" id="star-3" type="radio" name="star"/>
-	  <label class="star star-3" for="star-3"></label>
-	  <input class="star star-2" id="star-2" type="radio" name="star"/>
-	  <label class="star star-2" for="star-2"></label>
-	  <input class="star star-1" id="star-1" type="radio" name="star"/>
-	  <label class="star star-1" for="star-1"></label>
-	  <button class="btn btn-primary btn-lg" type="submit">Avaliar</button>
+	<form method="GET" action="{% url 'avaliar' filme_id=filme.id%}">
+		{% if filme.classificacao == '0'%}
+		  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+		  <label class="star star-5" for="star-5"></label>
+		  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+		  <label class="star star-4" for="star-4"></label>
+		  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+		  <label class="star star-3" for="star-3"></label>
+		  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+		  <label class="star star-2" for="star-2"></label>
+		  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+		  <label class="star star-1" for="star-1"></label>
+		{% else %}
+			{% if filme.classificacao == '1'%}
+			  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+			  <label class="star star-5" for="star-5"></label>
+			  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+			  <label class="star star-4" for="star-4"></label>
+			  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+			  <label class="star star-3" for="star-3"></label>
+			  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+			  <label class="star star-2" for="star-2"></label>
+			  <input class="star star-1" id="star-1" type="radio" name="star" value="1" checked />
+			  <label class="star star-1" for="star-1"></label>
+			{% else %}
+				{% if filme.classificacao == '2'%}
+				  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+				  <label class="star star-5" for="star-5"></label>
+				  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+				  <label class="star star-4" for="star-4"></label>
+				  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+				  <label class="star star-3" for="star-3"></label>
+				  <input class="star star-2" id="star-2" type="radio" name="star" value="2" checked />
+				  <label class="star star-2" for="star-2"></label>
+				  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+				  <label class="star star-1" for="star-1"></label>
+						{% else %}
+					{% if filme.classificacao == '3'%}
+					  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+					  <label class="star star-5" for="star-5"></label>
+					  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+					  <label class="star star-4" for="star-4"></label>
+					  <input class="star star-3" id="star-3" type="radio" name="star" value="3" checked />
+					  <label class="star star-3" for="star-3"></label>
+					  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+					  <label class="star star-2" for="star-2"></label>
+					  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+					  <label class="star star-1" for="star-1"></label>
+					{% else %}
+						{% if filme.classificacao == '4'%}
+						  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+						  <label class="star star-5" for="star-5"></label>
+						  <input class="star star-4" id="star-4" type="radio" name="star" value="4" checked />
+						  <label class="star star-4" for="star-4"></label>
+						  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+						  <label class="star star-3" for="star-3"></label>
+						  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+						  <label class="star star-2" for="star-2"></label>
+						  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+						  <label class="star star-1" for="star-1"></label>
+						{% else %}
+							<input class="star star-5" id="star-5" type="radio" name="star" value="5" checked />
+							  <label class="star star-5" for="star-5"></label>
+							  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+							  <label class="star star-4" for="star-4"></label>
+							  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+							  <label class="star star-3" for="star-3"></label>
+							  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+							  <label class="star star-2" for="star-2"></label>
+							  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+							  <label class="star star-1" for="star-1"></label>
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	  <button class="btn btn-primary btn-lg">Avaliar</button>
 	</form>
 	</div>
 	<hr>
+	{% for filme in filme.filmeinstancia_set.all %}
 	<h4>Filme</h4>
 	<p class="{% if filme.status == 'd' %}text-success{% elif filme.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ filme.get_status_display }}</p>
 	{% if filme.status != 'd' %}

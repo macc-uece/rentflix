@@ -31,6 +31,22 @@ class Filme(models.Model):
     genero = models.ManyToManyField(Genero, help_text = 'Escolha um gênero \
                                         para esse filme.')
 
+    tipos_classificacao = (
+        ('0', 'Nao-classificado'),
+        ('1', '1 Estrela'),
+        ('2', '2 Estrela'),
+        ('3', '3 Estrela'),
+        ('4', '4 Estrela'),
+        ('5', '5 Estrela'),
+    )
+
+    classificacao = models.CharField(
+        max_length = 1,
+        choices = tipos_classificacao,
+        blank = True,
+        default = '0'
+    )
+
     
     def __str__(self):
         """ String representando o modelo do objeto """
