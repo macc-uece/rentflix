@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from catalogo.models import Filme, Diretor, FilmeInstancia, Genero, HistoricoAluguel
+from catalogo.models import Filme, Diretor, FilmeInstancia, Genero, HistoricoAluguel, HistoricoFilmesAvaliacao
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.shortcuts import redirect
@@ -103,11 +103,76 @@ def pesquisar(request):
     return render(request, 'pesquisados.html')
     
 @login_required
-def avaliar(request):
-    avaliacao = request.GET.get('star')
+def avaliar(request, filme_id):
+    filme = Filme.objects.all().filter(id__exact=filme_id)[0]
+    filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
+    username_logado = get_perfil_logado(request)
+    star = request.GET.get('star')
+    filme_avaliado = HistoricoFilmesAvaliacao.objects.all().filter(id__exact=filme_instancia.id).filter(usuario__exact=username_logado)
+    if filme in filme_avaliado :
 
+        if star == "5":
+            filme_avaliado.classificacao ='5'
+            filme_avaliado.save()
+            context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
 
-    return redirect('filmes')
+            }   
+            return render(request, 'catalogo/filme_detail.html', context=context)
+
+        if star == "4":
+            filme_avaliado.classificacao ='4'
+            filme_avaliado.save()
+            context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
+
+            }   
+            return render(request, 'catalogo/filme_detail.html', context=context)
+
+        if star == "3":
+            filme_avaliado.classificacao ='3'
+            filme_avaliado.save()
+            context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
+
+            }   
+            return render(request, 'catalogo/filme_detail.html', context=context)
+
+        if star == "2":
+            filme_avaliado.classificacao ='2'
+            filme_avaliado.save()
+            context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
+
+            }   
+            return render(request, 'catalogo/filme_detail.html', context=context)
+
+        if star == "1":
+            filme_avaliado.classificacao ='1'
+            filme_avaliado.save()
+            context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
+
+            }   
+            return render(request, 'catalogo/filme_detail.html', context=context)
+    else:
+
+        filme_avaliado = HistoricoFilmesAvaliacao(id=filme_instancia.id, filme=filme_instancia.filme, 
+                usuario=username_logado, classificacao=star)
+        filme_avaliado.save()
+        context = {   
+                'filme' : filme,
+                'filme_avaliado' : filme_avaliado,
+
+            }   
+        return render(request, 'catalogo/filme_detail.html', context=context)
+
+    return redirect(request, 'catalogo/filme_detail.html', context=context)
     
 @login_required
 def pagar(request, filme_id):
@@ -144,6 +209,7 @@ class FilmeDetailView(LoginRequiredMixin, generic.DetailView):
     """
     Generic class-based detail view for a book.
     """
+
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model = Filme
