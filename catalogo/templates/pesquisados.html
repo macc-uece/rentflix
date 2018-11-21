@@ -21,7 +21,7 @@
           {% if list_filme_titulo %}
               {% for filme_instancia in list_filme_titulo %}
                   <div class="col-md-3" >
-                          <a href="{{ filme_instancia.get_absolute_url }}">
+                          <a href="{% url 'detail_filme' filme_id=filme_instancia.id %}">
                            <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
                           </a>
                   </div>
@@ -31,7 +31,7 @@
               {% for filme_instancia in list_filme_diretor %}
                   <div class="col-md-3" >
                           <div>{{ filme_instancia.diretor}}</div>
-                          <a href="{{ filme_instancia.get_absolute_url }}">
+                          <a href="{% url 'detail_filme' filme_id=filme_instancia.id %}">
                            <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
                           </a>
                   </div>
@@ -41,7 +41,7 @@
                 {% for filme_instancia in list_filme_genero %}
                     <div class="col-md-3" >
                             <div>{% for genero in filme_instancia.genero.all %}{{genero}}{% if not forloop.last %}, {% endif %}{% endfor %}</div>
-                            <a href="{{ filme_instancia.get_absolute_url }}">
+                            <a href="{% url 'detail_filme' filme_id=filme_instancia.id %}">
                              <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto />
                             </a>
                     </div>

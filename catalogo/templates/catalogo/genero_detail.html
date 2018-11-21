@@ -10,9 +10,10 @@
         <div class="row">
             {% for filme_instancia in filmes_relacionados %}
                   <div class="col-md-3" >
-                          <a href="{{ filme_instancia.get_absolute_url }}">
+                          <a href="{% url 'detail_filme' filme_id=filme_instancia.id %}">
                            <img src="/media/{{ filme_instancia.poster }}" alt="poster" width=200 height=auto/>
                           </a>
+
                   </div>
             {% endfor %}
         </div>

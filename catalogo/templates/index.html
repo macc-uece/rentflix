@@ -16,16 +16,16 @@
           <input type="radio" name="opcao" value="Diretor"/> Diretor 
           <input type="radio" name="opcao" value="Genero"/> Gênero<br/>  
           <button class="btn btn-primary btn-lg" type="submit">Pesquisar</button>
+
     </div>
   </form>
-  
   <h2>Em destaque:</h2>
 
     <div class="container">
         <div class="row">
               {% for filme_instancia in filmes_disponiveis %}
                   <div class="col-md-3" >
-                          <a href="{{ filme_instancia.filme.get_absolute_url }}">
+                          <a href="{% url 'detail_filme' filme_id=filme_instancia.filme.id %}">
                            <img src="/media/{{ filme_instancia.filme.poster }}" alt="poster" width=200 height=auto />
                           </a>
                   </div>

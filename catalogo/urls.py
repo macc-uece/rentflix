@@ -3,17 +3,15 @@ from catalogo import views
 
 urlpatterns = [
    path('', views.index, name='index'), 
-   path('filmes/', views.FilmeListView.as_view(), name='filmes'),
-   path('filme/<int:pk>', views.FilmeDetailView.as_view(), name='filme-info'),
-   path('diretores/', views.DiretorListView.as_view(), name='diretores'),
+   path('diretores/', views.diretores, name='diretores'),
    path('diretor/<diretor_nome>', views.detail_diretor, name='detail_diretor'),
-   path('diretor/<int:pk>', views.DiretorDetailView.as_view(), name='diretor-info'),
-   path('generos/', views.GeneroListView.as_view(), name='generos'),
+   path('generos/', views.generos, name='generos'),
    path('genero/<genero_nome>', views.detail_genero, name='detail_genero'),
-   path('genero/<int:pk>', views.GeneroDetailView.as_view(), name='genero-info'),
    path('alugar/<int:filme_id>', views.alugar, name='alugar'), 
    path('pagar/<int:filme_id>', views.pagar, name='pagar'),
    path('pesquisar/', views.pesquisar, name='pesquisar'),
    path('avaliar/<int:filme_id>/', views.avaliar, name='avaliar'),
+   path('filmes/', views.filmes, name='filmes'),
+   path('filme/<int:filme_id>/', views.detail_filme, name='detail_filme'),
 
 ]

@@ -15,7 +15,7 @@ class Genero(models.Model):
 
     def get_absolute_url(self):
         """ Retorna uma URL para acessar os detalhes de um diretor """
-        return reverse('genero-info', args = [str(self.id)])
+        return reverse('genero', args = [str(self.id)])
 
 
 class Filme(models.Model):
@@ -38,7 +38,7 @@ class Filme(models.Model):
 
     def get_absolute_url(self):
         """ Retorna a URL para acessar os detalhes de um filme """
-        return reverse('filme-info', args = [str(self.id)])
+        return reverse('filme', args = [str(self.id)])
     
     def display_genero(self):
         """ Cria uma string para o gênero """
@@ -83,7 +83,7 @@ class Diretor(models.Model):
 
     def get_absolute_url(self):
         """ Retorna uma URL para acessar os detalhes de um diretor """
-        return reverse('diretor-info', args = [str(self.id)])
+        return reverse('diretor', args = [str(self.id)])
 
     def __str__(self):
         """ String representando o modelo do objeto """

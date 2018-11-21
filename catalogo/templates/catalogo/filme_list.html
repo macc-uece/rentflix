@@ -8,7 +8,7 @@
 
       {% for filme in filme_list %}
       <li>
-        <a href="{{ filme.get_absolute_url }}">{{ filme.titulo }}</a> ({{filme.diretor}})
+        <a href="{% url 'detail_filme' filme_id=filme.id %}">{{ filme.titulo }}</a> ({{filme.diretor}})
       </li>
       {% endfor %}
 

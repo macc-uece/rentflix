@@ -34,29 +34,6 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 @login_required
-def detail_diretor(request, diretor_nome):
-    diretor_escolhido = Diretor.objects.get(nome__exact=diretor_nome)
-    filmes_dirigidos = Filme.objects.all().filter(diretor__exact=diretor_escolhido)
-    context = {   
-        'diretor_escolhido': diretor_escolhido,
-        'filmes_dirigidos' : filmes_dirigidos,
-        'diretor_nome': diretor_nome,
-    }   
-    return render(request, 'catalogo/diretor_detail.html', context=context)
-
-@login_required
-def detail_genero(request, genero_nome):
-    genero_escolhido = Genero.objects.get(nome__exact=genero_nome)
-    filmes_relacionados = Filme.objects.all().filter(genero__exact=genero_escolhido)
-    context = {   
-        'genero_escolhido': genero_escolhido,
-        'filmes_relacionados' : filmes_relacionados,
-        'genero_nome': genero_nome,
-    }   
-    return render(request, 'catalogo/genero_detail.html', context=context)
-
-
-@login_required
 def alugar(request, filme_id):
     filme_escolhido = Filme.objects.all().filter(id__exact=filme_id)[0]
     context = {   
@@ -67,10 +44,9 @@ def alugar(request, filme_id):
 @login_required
 def pesquisar(request):
     filmesPesquisados = request.GET.get('palavra')
-    filmes_disponiveis = FilmeInstancia.objects.all().filter(status__exact='d')
     opcao = request.GET.get('opcao')
 
-    if opcao == "Filme":
+    if opcao == "Filme" or opcao== None:
         list_filme_titulo = Filme.objects.all().filter(titulo__contains=filmesPesquisados)
         context = {   
             'list_filme_titulo' : list_filme_titulo,
@@ -92,6 +68,7 @@ def pesquisar(request):
 
     if opcao == "Diretor":
         list_filme_diretor = Filme.objects.all().filter(diretor__nome__contains=filmesPesquisados)
+        print(list_filme_diretor)
         context = {   
             'list_filme_diretor' : list_filme_diretor,
             'filmesPesquisados' : filmesPesquisados,
@@ -100,17 +77,21 @@ def pesquisar(request):
         }   
         return render(request, 'pesquisados.html', context=context)
 
+    
     return render(request, 'pesquisados.html')
     
 @login_required
 def avaliar(request, filme_id):
-    filme = Filme.objects.all().filter(id__exact=filme_id)[0]
+    filme = Filme.objects.get(id__exact=filme_id)
     filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
     username_logado = get_perfil_logado(request)
     star = request.GET.get('star')
-    filme_avaliado = HistoricoFilmesAvaliacao.objects.all().filter(id__exact=filme_instancia.id).filter(usuario__exact=username_logado)
-    if filme in filme_avaliado :
+    try:
+        filme_avaliado = HistoricoFilmesAvaliacao.objects.get(usuario__exact=username_logado, id__exact=filme_instancia.id)
+    except HistoricoFilmesAvaliacao.DoesNotExist:
+        filme_avaliado = None
 
+    if filme_avaliado:
         if star == "5":
             filme_avaliado.classificacao ='5'
             filme_avaliado.save()
@@ -195,6 +176,60 @@ def pagar(request, filme_id):
 def get_perfil_logado(request):
     return request.user.username
 
+@login_required
+def filmes(request):
+    return render(request, 'catalogo/filme_list.html', {"filme_list" : Filme.objects.all()})
+
+@login_required
+def diretores(request):
+    return render(request, 'catalogo/diretor_list.html', {"diretor_list" : Diretor.objects.all()})
+
+@login_required
+def generos(request):
+    return render(request, 'catalogo/genero_list.html', {"genero_list" : Genero.objects.all()})
+
+@login_required
+def detail_filme(request, filme_id):
+    filme = Filme.objects.get(id__exact=filme_id)
+    filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
+    username_logado = get_perfil_logado(request)
+    try:
+        filme_avaliado = HistoricoFilmesAvaliacao.objects.get(usuario__exact=username_logado, id__exact=filme_instancia.id)
+    except HistoricoFilmesAvaliacao.DoesNotExist:
+        filme_avaliado = None
+    
+
+    if filme_avaliado :
+        context = {
+            'filme' : filme,
+            'username_logado' : username_logado,
+            'filme_avaliado' : filme_avaliado,
+        }
+        return render(request, 'catalogo/filme_detail.html', context=context)
+    return render(request, 'catalogo/filme_detail.html', {"filme" : filme})
+
+@login_required
+def detail_diretor(request, diretor_nome):
+    diretor_escolhido = Diretor.objects.get(nome__exact=diretor_nome)
+    filmes_dirigidos = Filme.objects.all().filter(diretor__exact=diretor_escolhido)
+    context = {   
+        'diretor_escolhido': diretor_escolhido,
+        'filmes_dirigidos' : filmes_dirigidos,
+        'diretor_nome': diretor_nome,
+    }   
+    return render(request, 'catalogo/diretor_detail.html', context=context)
+
+@login_required
+def detail_genero(request, genero_nome):
+    genero_escolhido = Genero.objects.get(nome__exact=genero_nome)
+    filmes_relacionados = Filme.objects.all().filter(genero__exact=genero_escolhido)
+    context = {   
+        'genero_escolhido': genero_escolhido,
+        'filmes_relacionados' : filmes_relacionados,
+        'genero_nome': genero_nome,
+    }   
+    return render(request, 'catalogo/genero_detail.html', context=context)
+
 class FilmeListView(LoginRequiredMixin, generic.ListView):
     """
     Generic class-based view for a list of books.
@@ -209,45 +244,6 @@ class FilmeDetailView(LoginRequiredMixin, generic.DetailView):
     """
     Generic class-based detail view for a book.
     """
-
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model = Filme
-
-
-class DiretorListView(LoginRequiredMixin, generic.ListView):
-    """
-    Generic class-based list view for a list of authors.
-    """
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-    model = Diretor
-    paginate_by = 10 
-
-
-class DiretorDetailView(LoginRequiredMixin, generic.DetailView):
-    """
-    Generic class-based detail view for an author.
-    """
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-    model = Diretor
-
-class GeneroListView(LoginRequiredMixin, generic.ListView):
-    """
-    Generic class-based list view for a list of authors.
-    """
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-    model = Genero
-    paginate_by = 10 
-
-
-class GeneroDetailView(LoginRequiredMixin, generic.DetailView):
-    """
-    Generic class-based detail view for an author.
-    """
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-    model = Genero
-
