@@ -204,12 +204,19 @@ def detail_filme(request, filme_id):
     if filme_avaliado :
         context = {
             'filme' : filme,
+            'filmeInstancia': filme_instancia,
             'comentarios': comentarios,
             'username_logado' : username_logado,
             'filme_avaliado' : filme_avaliado,
         }
         return render(request, 'catalogo/filme_detail.html', context=context)
-    return render(request, 'catalogo/filme_detail.html', {"filme" : filme, "comentarios": comentarios})
+    return render(request, 'catalogo/filme_detail.html', {"filme" : filme,
+        "filmeInstancia": filme_instancia, "comentarios": comentarios})
+
+@login_required
+def comentar(request, filme_instancia):
+    pass
+
 
 @login_required
 def detail_diretor(request, diretor_nome):

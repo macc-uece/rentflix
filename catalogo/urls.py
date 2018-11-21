@@ -11,6 +11,7 @@ urlpatterns = [
    path('pagar/<int:filme_id>', views.pagar, name='pagar'),
    path('pesquisar/', views.pesquisar, name='pesquisar'),
    path('avaliar/<int:filme_id>/', views.avaliar, name='avaliar'),
+   path('comentar/<filme_instancia>', views.comentar, name='comentar'),
    path('filmes/', views.filmes, name='filmes'),
    path('filme/<int:filme_id>/', views.detail_filme, name='detail_filme'),
 

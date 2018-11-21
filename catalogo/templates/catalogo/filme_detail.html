@@ -80,6 +80,35 @@
 	  height: 125px;
 	  overflow: visible;
 	}
+
+    .thumbnail {
+    padding:0px;
+    }
+    .panel {
+        position:relative;
+    }
+    .panel>.panel-heading:after,.panel>.panel-heading:before{
+        position:absolute;
+        top:11px;left:-16px;
+        right:100%;
+        width:0;
+        height:0;
+        display:block;
+        content:" ";
+        border-color:transparent;
+        border-style:solid solid outset;
+        pointer-events:none;
+    }
+    .panel>.panel-heading:after{
+        border-width:7px;
+        border-right-color:#f7f7f7;
+        margin-top:1px;
+        margin-left:2px;
+    }
+    .panel>.panel-heading:before{
+        border-right-color:#ddd;
+        border-width:8px;
+    }
 	</style>
 
 	<h1>Classificação</h1>
@@ -187,31 +216,61 @@
 		<input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
 		<label class="star star-1" for="star-1"></label>
     {% endif %}
-	<button class="btn btn-primary btn-lg">Avaliar</button>
+	    <button class="btn btn-primary btn-lg">Avaliar</button>
 	</form>
 	</div>
 	<hr>
-	{% for filme in filme.filmeinstancia_set.all %}
-	<h4>Filme</h4>
-	<p class="{% if filme.status == 'd' %}text-success{% elif filme.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ filme.get_status_display }}</p>
-	{% if filme.status != 'd' %}
-      <p><strong>Deve ser devolvido:</strong> {{filme.data_devolucao}}</p>
-    {% else %}
-       <a href="{% url 'alugar' filme_id=filme.filme.id %}" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
-    {% endif %}
 
+	{% for filme in filme.filmeinstancia_set.all %}
+        <div class="row">
+            <h3><strong>O filme está:</h3> 
+            <h4 class="{% if filme.status == 'd' %}text-success
+                {% elif filme.status == 'm' %}text-danger
+                {% else %}text-warning{% endif %}">{{ filme.get_status_display }}
+            </h4> 
+        </div>
+       {% if filme.status != 'd' %}
+        <p><strong>Deve ser devolvido:</strong> {{filme.data_devolucao}}</p>
+        {% else %}
+            <a href="{% url 'alugar' filme_id=filme.filme.id %}" class="btn btn-lg btn-primary btn-block" style="width: 100px; height: 50px">Alugar</a>
+        {% endif %}
 	{% endfor %}
 
     <hr>
     
-    <h4>Comentários:</h4>
+    <h4>Comentários - ({{ comentarios | length}})</h4>
     {% for comentario in comentarios %}
-        <p>{{ comentario.data_criacao }}</p>
-        <p>{{ comentario.usuario }}</p>
-        <p>{{ comentario.conteudo }}</p>
+        
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{ comentario.usuario }}</strong> <span
+                     class="text-muted">{{ comentario.data_criacao }}</span>
+                </div>
+                <div class="panel-body"> 
+                    <p>{{ comentario.conteudo }}</p>
+                </div><!-- /panel-body -->
+            </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+    </div><!-- /row -->
+    <hr>
     {% empty%}
-        <p>Não possui comentários</p>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <p>Este filme não possui comentários</p>
+                </div><!-- /panel-body -->
+            </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+    </div><!-- /row -->
+
     {% endfor %}
+    
+    <form method="POST" action="{% url 'comentar' filme_instancia=filmeInstancia %}">
+	    <button class="btn btn-primary btn-lg">Comentar</button>
+    </form>
 
 </div>
 {% endblock %}
