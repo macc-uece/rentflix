@@ -114,7 +114,7 @@
 	<h1>Classificação</h1>
 	<div class="stars">
 	<form method="GET" action="{% url 'avaliar' filme_id=filme.id%}">
-	{% if filme_avaliado %}
+    {% if filme_avaliado %}
 		{% if filme_avaliado.classificacao == '0' %}
 		  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
 		  <label class="star star-5" for="star-5"></label>
@@ -268,8 +268,9 @@
 
     {% endfor %}
     
-    <form method="POST" action="{% url 'comentar' filme_instancia=filmeInstancia %}">
-	    <button class="btn btn-primary btn-lg">Comentar</button>
+    <form method="POST" action="{% url 'comentar' filme_instancia=filmeInstancia%}">
+	    {% csrf_token %}
+        <button class="btn btn-primary btn-lg">Comentar</button>
     </form>
 
 </div>
