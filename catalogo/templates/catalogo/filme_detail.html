@@ -201,5 +201,17 @@
     {% endif %}
 
 	{% endfor %}
+
+    <hr>
+    
+    <h4>Comentários:</h4>
+    {% for comentario in comentarios %}
+        <p>{{ comentario.data_criacao }}</p>
+        <p>{{ comentario.usuario }}</p>
+        <p>{{ comentario.conteudo }}</p>
+    {% empty%}
+        <p>Não possui comentários</p>
+    {% endfor %}
+
 </div>
 {% endblock %}

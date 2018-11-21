@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from catalogo.models import Filme, Diretor, FilmeInstancia, Genero, HistoricoAluguel, HistoricoFilmesAvaliacao
+from catalogo.models import Filme, Diretor, FilmeInstancia, Genero
+from catalogo.models import HistoricoAluguel, HistoricoFilmesAvaliacao, Comentario
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.shortcuts import redirect
@@ -198,15 +199,17 @@ def detail_filme(request, filme_id):
     except HistoricoFilmesAvaliacao.DoesNotExist:
         filme_avaliado = None
     
-
+    comentarios = Comentario.objects.all().filter(comentario__exact = filme_instancia)
+    
     if filme_avaliado :
         context = {
             'filme' : filme,
+            'comentarios': comentarios,
             'username_logado' : username_logado,
             'filme_avaliado' : filme_avaliado,
         }
         return render(request, 'catalogo/filme_detail.html', context=context)
-    return render(request, 'catalogo/filme_detail.html', {"filme" : filme})
+    return render(request, 'catalogo/filme_detail.html', {"filme" : filme, "comentarios": comentarios})
 
 @login_required
 def detail_diretor(request, diretor_nome):
