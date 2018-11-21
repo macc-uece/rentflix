@@ -2,11 +2,12 @@ from django.shortcuts import render
 from catalogo.models import Filme, Diretor, FilmeInstancia, Genero
 from catalogo.models import HistoricoAluguel, HistoricoFilmesAvaliacao, Comentario
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views import generic
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
-
+from .forms import ComentarioForm
 
 
 @login_required
@@ -92,66 +93,42 @@ def avaliar(request, filme_id):
     except HistoricoFilmesAvaliacao.DoesNotExist:
         filme_avaliado = None
 
+    context = {
+        'filme': filme,
+        'filme_avaliado': filme_avaliado,
+        'filmeInstancia': filme_instancia
+    }
+
     if filme_avaliado:
         if star == "5":
             filme_avaliado.classificacao ='5'
             filme_avaliado.save()
-            context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
             return render(request, 'catalogo/filme_detail.html', context=context)
 
         if star == "4":
             filme_avaliado.classificacao ='4'
             filme_avaliado.save()
-            context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
             return render(request, 'catalogo/filme_detail.html', context=context)
 
         if star == "3":
             filme_avaliado.classificacao ='3'
             filme_avaliado.save()
-            context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
             return render(request, 'catalogo/filme_detail.html', context=context)
 
         if star == "2":
             filme_avaliado.classificacao ='2'
             filme_avaliado.save()
-            context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
             return render(request, 'catalogo/filme_detail.html', context=context)
 
         if star == "1":
             filme_avaliado.classificacao ='1'
             filme_avaliado.save()
-            context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
             return render(request, 'catalogo/filme_detail.html', context=context)
     else:
 
         filme_avaliado = HistoricoFilmesAvaliacao(id=filme_instancia.id, filme=filme_instancia.filme, 
                 usuario=username_logado, classificacao=star)
         filme_avaliado.save()
-        context = {   
-                'filme' : filme,
-                'filme_avaliado' : filme_avaliado,
-
-            }   
         return render(request, 'catalogo/filme_detail.html', context=context)
 
     return redirect(request, 'catalogo/filme_detail.html', context=context)
@@ -210,12 +187,28 @@ def detail_filme(request, filme_id):
             'filme_avaliado' : filme_avaliado,
         }
         return render(request, 'catalogo/filme_detail.html', context=context)
-    return render(request, 'catalogo/filme_detail.html', {"filme" : filme,
-        "filmeInstancia": filme_instancia, "comentarios": comentarios})
+    return render(request, 'catalogo/filme_detail.html', {"filme" : filme, "filmeInstancia": filme_instancia, "comentarios": comentarios})
 
+@ensure_csrf_cookie
 @login_required
 def comentar(request, filme_instancia):
-    pass
+    username_logado = get_perfil_logado(request)
+    filmeInstancia = FilmeInstancia.objects.all().filter(id__exact = filme_instancia.split(" ")[0])
+    
+    if request.method == "POST":
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            c = form.save(commit=False)
+            c.comentario = filmeInstancia[0]
+            c.usuario = username_logado
+            c.email = request.user.email
+            c.save()
+            return redirect('detail_filme', filme_id=filmeInstancia[0].filme.id)
+    else:
+        form = ComentarioForm()
+    template = 'catalogo/add_comentario.html'
+    context = {'form': form}
+    return render(request, template, context)
 
 
 @login_required
