@@ -1,6 +1,6 @@
 from django.contrib import admin
-from catalogo.models import Filme, Genero, FilmeInstancia, Diretor, HistoricoAluguel, HistoricoFilmesAvaliacao
-
+from catalogo.models import Filme, Genero, FilmeInstancia, Comentario
+from catalogo.models import Diretor, HistoricoAluguel, HistoricoFilmesAvaliacao
 
 @admin.register(Filme)
 class FilmeAdmin(admin.ModelAdmin):
@@ -10,6 +10,10 @@ class FilmeAdmin(admin.ModelAdmin):
 class FilmeInstanciaAdmin(admin.ModelAdmin):
     list_filter = ('status', 'data_devolucao')
     list_diplay = ('id', 'filme', 'data_devolucao', 'status')
+
+@admin.register(Comentario)
+class ComentarioAdmin(admin.ModelAdmin):
+    list_diplay = ['usuario', 'email']
 
 admin.site.register(Genero)
 admin.site.register(Diretor)

@@ -130,4 +130,22 @@ class HistoricoFilmesAvaliacao(models.Model):
         choices = tipos_classificacao,
         blank = True,
         default = '0'
-    )   
+    )  
+
+class Comentario(models.Model):
+    comentario = models.ForeignKey(FilmeInstancia, related_name='comentarios',
+            on_delete = models.SET_NULL, null = True)
+    #filme = models.OneToOneField(Filme, on_delete = models.SET_NULL, null = True)
+    usuario = models.CharField(max_length = 200)
+    email = models.EmailField()
+    conteudo = models.TextField()
+    data_criacao = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.usuario + ": " + self.conteudo
+
+
+
+
+
+
