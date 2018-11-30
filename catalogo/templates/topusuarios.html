@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Top Usuários</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Usuário</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Vezes alugou</th> 
+                <th scope="col">Gastou</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            {% if usuario.alugou > 0 %}
+                <tr>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.alugou }}</td>
+                    <td>{{ usuario.gastou }}</td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

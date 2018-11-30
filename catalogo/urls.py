@@ -4,7 +4,8 @@ from catalogo import views
 urlpatterns = [
    path('', views.index, name='index'), 
    path('paineladmin/', views.painel_admin, name='painel_admin'), 
-   path('topalugados/', views.top_alugados, name='top_alugados'),
+   path('topalugados/', views.top_alugados, name='top_alugados'), 
+   path('topusuarios/', views.top_usuarios, name='top_usuarios'),
    path('diretores/', views.diretores, name='diretores'),
    path('diretor/<diretor_nome>', views.detail_diretor, name='detail_diretor'),
    path('generos/', views.generos, name='generos'),

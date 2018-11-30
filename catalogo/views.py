@@ -55,6 +55,11 @@ def top_alugados(request):
     context = { 'filmes': filmes }
     return render(request, 'topalugados.html', context=context)
     
+@login_required
+def top_usuarios(request):
+    usuarios = CustomUser.objects.all().filter().order_by('-alugou')
+    context = { 'usuarios': usuarios }
+    return render(request, 'topusuarios.html', context=context)
 
 @login_required
 def pesquisar(request):
