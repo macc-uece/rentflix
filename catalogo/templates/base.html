@@ -24,14 +24,17 @@
           <li><a href="{% url 'filmes' %}">Filmes</a></li>
           <li><a href="{% url 'diretores' %}">Diretores</a></li>
           <li><a href="{% url 'generos' %}">Gêneros</a></li>  
-         
+        
+        <hr>
+    
+        <li><a href="{% url 'top_alugados' %}?next={{request.path}}">Top Alugados</a></li>   
+        
         <hr>
           <li>User: {{ user.get_username }}</li>
           {% if user.is_staff %}
             
-            <li><a href="{% url 'painel_admin'%}?next={{request.path}}">Painel
-                    Administrativo</a></li>   
-          
+            <li><a href="{% url 'painel_admin' %}?next={{request.path}}">Administração</a></li>    
+
           {% endif %}  
           <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
         {% endif %} 

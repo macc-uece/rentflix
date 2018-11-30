@@ -53,6 +53,7 @@ class FilmeInstancia(models.Model):
             'ID único para um filme no estoque')
     filme = models.ForeignKey('Filme', on_delete = models.SET_NULL, null = True)
     data_devolucao = models.DateField(null = True, blank = True)
+    alugado_number = models.IntegerField(default = 0)
 
     STATUS_EMPRESTIMO = (
         ('m', 'Manutenção'),

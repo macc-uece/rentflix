@@ -8,6 +8,7 @@ class FilmeAdmin(admin.ModelAdmin):
 
 @admin.register(FilmeInstancia)
 class FilmeInstanciaAdmin(admin.ModelAdmin):
+    exclude = ('alugado_number',)
     list_filter = ('status', 'data_devolucao')
     list_diplay = ('id', 'filme', 'data_devolucao', 'status')
 

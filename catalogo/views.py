@@ -49,6 +49,12 @@ def painel_admin(request):
     context = { 'filmes': filmes }
     return render(request, 'paineladmin.html', context=context)
 
+@login_required
+def top_alugados(request):
+    filmes = FilmeInstancia.objects.all().filter().order_by('-alugado_number')
+    context = { 'filmes': filmes }
+    return render(request, 'topalugados.html', context=context)
+    
 
 @login_required
 def pesquisar(request):
@@ -150,6 +156,10 @@ def pagar(request, filme_id):
     
     filme_instancia.status = 'e'
     filme_instancia.data_devolucao = data_devolucao
+    if filme_instancia.alugado_number == None:
+        filme_instancia.alugado_number = 1
+    else:
+        filme_instancia.alugado_number = filme_instancia.alugado_number + 1
     filme_instancia.save()
     
     historico = HistoricoAluguel(id=filme_instancia.id, filme=filme_instancia.filme, usuario=username_logado, 

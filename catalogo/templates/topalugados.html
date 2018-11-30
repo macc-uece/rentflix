@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Top Filme Alugados</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Diretor</th>
+                <th scope="col">Vezes alugado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for filme in filmes %}
+            {% if filme.alugado_number > 0 %}
+                <tr>
+                    <td><a href="{% url 'detail_filme' filme_id=filme.filme.id %}">{{ filme.filme.titulo }}</a> </td>
+                    <td><a href="{% url 'detail_diretor' diretor_nome=filme.filme.diretor %}">{{ filme.filme.diretor }}</td> 
+                    <td>{{ filme.alugado_number }}</td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
