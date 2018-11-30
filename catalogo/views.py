@@ -94,57 +94,73 @@ def pesquisar(request):
 
     
     return render(request, 'pesquisados.html')
-    
+
 @login_required
 def avaliar(request, filme_id):
     filme = Filme.objects.get(id__exact=filme_id)
     filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
-    username_logado = get_perfil_logado(request)
-    star = request.GET.get('star')
-    try:
-        filme_avaliado = HistoricoFilmesAvaliacao.objects.get(usuario__exact=username_logado, id__exact=filme_instancia.id)
-    except HistoricoFilmesAvaliacao.DoesNotExist:
-        filme_avaliado = None
-
     context = {
         'filme': filme,
-        'filme_avaliado': filme_avaliado,
-        'filmeInstancia': filme_instancia
+        'filmeInstancia': filme_instancia,
     }
+    return render(request, 'catalogo/add_avaliacao.html', context=context)
+    
+@login_required
+def avaliado(request, filme_id):
+    filme = Filme.objects.get(id__exact=filme_id)
+    filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
+    username_logado = get_perfil_logado(request)
+    star = request.GET.get('star')
+    print(star)
+    if star == None :
+        return render(request, 'catalogo/add_avaliacao.html', {"filme" : filme, "avaliado" : '0' })
 
-    if filme_avaliado:
-        if star == "5":
-            filme_avaliado.classificacao ='5'
+    else :
+        try:
+            filme_avaliado = HistoricoFilmesAvaliacao.objects.get(usuario__exact=username_logado, filme__exact=filme_instancia.filme)
+        except HistoricoFilmesAvaliacao.DoesNotExist:
+            filme_avaliado = None
+
+        context = {
+            'filme': filme,
+            'filme_avaliado': filme_avaliado,
+            'filmeInstancia': filme_instancia
+        }
+
+        if filme_avaliado:
+            print('entrei')
+            if star == "5":
+                filme_avaliado.classificacao ='5'
+                filme_avaliado.save()
+
+
+            if star == "4":
+                filme_avaliado.classificacao ='4'
+                filme_avaliado.save()
+
+
+            if star == "3":
+                filme_avaliado.classificacao ='3'
+                filme_avaliado.save()
+
+
+            if star == "2":
+                filme_avaliado.classificacao ='2'
+                filme_avaliado.save()
+
+
+            if star == "1":
+                filme_avaliado.classificacao ='1'
+                filme_avaliado.save()
+
+        else:
+
+            filme_avaliado = HistoricoFilmesAvaliacao(filme=filme_instancia.filme, 
+                    usuario=username_logado, classificacao=star)
             filme_avaliado.save()
-            return render(request, 'catalogo/filme_detail.html', context=context)
 
-        if star == "4":
-            filme_avaliado.classificacao ='4'
-            filme_avaliado.save()
-            return render(request, 'catalogo/filme_detail.html', context=context)
 
-        if star == "3":
-            filme_avaliado.classificacao ='3'
-            filme_avaliado.save()
-            return render(request, 'catalogo/filme_detail.html', context=context)
-
-        if star == "2":
-            filme_avaliado.classificacao ='2'
-            filme_avaliado.save()
-            return render(request, 'catalogo/filme_detail.html', context=context)
-
-        if star == "1":
-            filme_avaliado.classificacao ='1'
-            filme_avaliado.save()
-            return render(request, 'catalogo/filme_detail.html', context=context)
-    else:
-
-        filme_avaliado = HistoricoFilmesAvaliacao(id=filme_instancia.id, filme=filme_instancia.filme, 
-                usuario=username_logado, classificacao=star)
-        filme_avaliado.save()
-        return render(request, 'catalogo/filme_detail.html', context=context)
-
-    return redirect(request, 'catalogo/filme_detail.html', context=context)
+        return redirect('detail_filme',  filme_id=filme.id)
     
 @login_required
 def pagar(request, filme_id):
@@ -187,25 +203,53 @@ def generos(request):
 def detail_filme(request, filme_id):
     filme = Filme.objects.get(id__exact=filme_id)
     filme_instancia = FilmeInstancia.objects.get(filme__exact=filme)
-    username_logado = get_perfil_logado(request)
-    try:
-        filme_avaliado = HistoricoFilmesAvaliacao.objects.get(usuario__exact=username_logado, id__exact=filme_instancia.id)
-    except HistoricoFilmesAvaliacao.DoesNotExist:
-        filme_avaliado = None
+    num_filme_avaliado_1 = HistoricoFilmesAvaliacao.objects.all().filter(filme__exact=filme_instancia.filme).filter(classificacao__exact='1').count()
+    num_filme_avaliado_2 = HistoricoFilmesAvaliacao.objects.all().filter(filme__exact=filme_instancia.filme).filter(classificacao__exact='2').count()
+    num_filme_avaliado_3 = HistoricoFilmesAvaliacao.objects.all().filter(filme__exact=filme_instancia.filme).filter(classificacao__exact='3').count()
+    num_filme_avaliado_4 = HistoricoFilmesAvaliacao.objects.all().filter(filme__exact=filme_instancia.filme).filter(classificacao__exact='4').count()
+    num_filme_avaliado_5 = HistoricoFilmesAvaliacao.objects.all().filter(filme__exact=filme_instancia.filme).filter(classificacao__exact='5').count()
+    if num_filme_avaliado_1 == 0 and num_filme_avaliado_2 == 0 and num_filme_avaliado_3 == 0 and num_filme_avaliado_4 == 0 and num_filme_avaliado_5 == 0 :
+        media = 0
+
+    else :
+        media = ((num_filme_avaliado_1 * 1) + (num_filme_avaliado_2 * 2) + (num_filme_avaliado_3 * 3) + (num_filme_avaliado_4 * 4) + (num_filme_avaliado_5 * 5))/((num_filme_avaliado_1 + num_filme_avaliado_2 + num_filme_avaliado_3 + num_filme_avaliado_4 + num_filme_avaliado_5))
+
+    print(num_filme_avaliado_1 * 1)
+    print(num_filme_avaliado_2 * 2)
+    print(num_filme_avaliado_3 * 3)
+    print(num_filme_avaliado_4 * 4)
+    print(num_filme_avaliado_5 * 5)
+    print(media)
+    if media > 0 and media <= 1.5 :
+        filme.classificacao = '1' 
+        filme.save()
+
+    if media > 1.5 and media <= 2.5:
+        filme.classificacao = '2' 
+        filme.save() 
+
+    if media > 2.5 and media <= 3.5:
+        filme.classificacao = '3' 
+        filme.save()
+
+    if media > 3.5 and media <= 4.5:
+        filme.classificacao = '4' 
+        filme.save()
+
+    if media > 4.5:
+        filme.classificacao = '5' 
+        filme.save()
     
     comentarios = Comentario.objects.all().filter(comentario__exact = filme_instancia)
     
-    if filme_avaliado :
-        context = {
-            'filme' : filme,
-            'filmeInstancia': filme_instancia,
-            'comentarios': comentarios,
-            'username_logado' : username_logado,
-            'filme_avaliado' : filme_avaliado,
-        }
-        return render(request, 'catalogo/filme_detail.html', context=context)
-    return render(request, 'catalogo/filme_detail.html', {"filme" : filme, "filmeInstancia": filme_instancia, "comentarios": comentarios})
+    context = {
+        'filme' : filme,
+        'filmeInstancia': filme_instancia,
+        'comentarios': comentarios,
+    }
 
+    return render(request, 'catalogo/filme_detail.html', context=context)
+    
 @ensure_csrf_cookie
 @login_required
 def comentar(request, filme_instancia):

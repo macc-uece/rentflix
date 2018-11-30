@@ -43,10 +43,7 @@
 	input.star-1:checked ~ label.star:before {
 	  color: #F62;
 	}
-	 
-	label.star:hover{
-	  transform: rotate(-15deg) scale(1.3);
-	}
+	
 	 
 	label.star:before{
 	  content:'\f006';
@@ -76,10 +73,7 @@
 	  transition:opacity .25s;
 	}
 	 
-	input.star:checked ~ .rev-box{
-	  height: 125px;
-	  overflow: visible;
-	}
+	
 
     .thumbnail {
     padding:0px;
@@ -114,109 +108,84 @@
 	<h1>Classificação</h1>
 	<div class="stars">
 	<form method="GET" action="{% url 'avaliar' filme_id=filme.id%}">
-    {% if filme_avaliado %}
-		{% if filme_avaliado.classificacao == '0' %}
-		  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+
+		{% if filme.classificacao == '0' %}
+			<font color="red">Este filme ainda não foi avaliado</font><br/>
+		  <input class="star star-5" id="star-5" name="star" type="radio" value="5" disabled/>
 		  <label class="star star-5" for="star-5"></label>
-		  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+		  <input class="star star-4" id="star-4" name="star" type="radio" value="4" disabled/>
 		  <label class="star star-4" for="star-4"></label>
-		  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+		  <input class="star star-3" id="star-3" name="star" type="radio" value="3" disabled/>
 		  <label class="star star-3" for="star-3"></label>
-		  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+		  <input class="star star-2" id="star-2" name="star" type="radio" value="2" disabled/>
 		  <label class="star star-2" for="star-2"></label>
-		  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+		  <input class="star star-1" id="star-1" name="star" type="radio" value="1" disabled/>
 		  <label class="star star-1" for="star-1"></label>
 		{% else %}
-			{% if filme_avaliado.classificacao == '1' %}
-			  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+			{% if filme.classificacao == '1' %}
+			  <input class="star star-5" id="star-5" name="star" type="radio" value="5" disabled/>
 			  <label class="star star-5" for="star-5"></label>
-			  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+			  <input class="star star-4" id="star-4" name="star" type="radio" value="4" disabled/>
 			  <label class="star star-4" for="star-4"></label>
-			  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+			  <input class="star star-3" id="star-3" name="star" type="radio" value="3" disabled/>
 			  <label class="star star-3" for="star-3"></label>
-			  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+			  <input class="star star-2" id="star-2" name="star" type="radio" value="2" disabled/>
 			  <label class="star star-2" for="star-2"></label>
-			  <input class="star star-1" id="star-1" type="radio" name="star" value="1" checked />
+			  <input class="star star-1" id="star-1" name="star" type="radio" value="1" checked disabled/>
 			  <label class="star star-1" for="star-1"></label>
 			{% else %}
-				{% if filme_avaliado.classificacao == '2' %}
-				  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+				{% if filme.classificacao == '2' %}
+				  <input class="star star-5" id="star-5" name="star" type="radio" value="5" disabled/>
 				  <label class="star star-5" for="star-5"></label>
-				  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+				  <input class="star star-4" id="star-4" name="star" type="radio" value="4" disabled/>
 				  <label class="star star-4" for="star-4"></label>
-				  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+				  <input class="star star-3" id="star-3" name="star" type="radio" value="3" disabled/>
 				  <label class="star star-3" for="star-3"></label>
-				  <input class="star star-2" id="star-2" type="radio" name="star" value="2" checked />
+				  <input class="star star-2" id="star-2" name="star" type="radio" value="2" checked disabled/>
 				  <label class="star star-2" for="star-2"></label>
-				  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+				  <input class="star star-1" id="star-1" name="star" type="radio" value="1" disabled/>
 				  <label class="star star-1" for="star-1"></label>
 				{% else %}
-					{% if filme_avaliado.classificacao == '3' %}
-					  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+					{% if filme.classificacao == '3' %}
+					  <input class="star star-5" id="star-5" name="star" type="radio" value="5" disabled/>
 					  <label class="star star-5" for="star-5"></label>
-					  <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+					  <input class="star star-4" id="star-4" name="star" type="radio" value="4" disabled/>
 					  <label class="star star-4" for="star-4"></label>
-					  <input class="star star-3" id="star-3" type="radio" name="star" value="3" checked />
+					  <input class="star star-3" id="star-3" name="star" type="radio" value="3" checked disabled/>
 					  <label class="star star-3" for="star-3"></label>
-					  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+					  <input class="star star-2" id="star-2" name="star" type="radio" value="2" disabled/>
 					  <label class="star star-2" for="star-2"></label>
-					  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+					  <input class="star star-1" id="star-1" name="star" type="radio" value="1" disabled/>
 					  <label class="star star-1" for="star-1"></label>
 					{% else %}
-						{% if filme_avaliado.classificacao == '4' %}
-						  <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+						{% if filme.classificacao == '4' %}
+						  <input class="star star-5" id="star-5" name="star" type="radio" value="5" disabled/>
 						  <label class="star star-5" for="star-5"></label>
-						  <input class="star star-4" id="star-4" type="radio" name="star" value="4" checked />
+						  <input class="star star-4" id="star-4" name="star" type="radio" value="4" checked disabled/>
 						  <label class="star star-4" for="star-4"></label>
-						  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+						  <input class="star star-3" id="star-3" name="star" type="radio" value="3" disabled/>
 						  <label class="star star-3" for="star-3"></label>
-						  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+						  <input class="star star-2" id="star-2" name="star" type="radio" value="2" disabled/>
 						  <label class="star star-2" for="star-2"></label>
-						  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+						  <input class="star star-1" id="star-1" name="star" type="radio" value="1" disabled/>
 						  <label class="star star-1" for="star-1"></label>
 						{% else %}
-							{% if filme_avaliado.classificacao == '5' %}
-							  <input class="star star-5" id="star-5" type="radio" name="star" value="5" checked />
-							  <label class="star star-5" for="star-5"></label>
-							  <input class="star star-4" id="star-4" type="radio" name="star" value="4" />
-							  <label class="star star-4" for="star-4"></label>
-							  <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
-							  <label class="star star-3" for="star-3"></label>
-							  <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
-							  <label class="star star-2" for="star-2"></label>
-							  <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
-							  <label class="star star-1" for="star-1"></label>
-							{% else %}
-								<input class="star star-5" id="star-5" type="radio" name="star" value="5" />
-							  	<label class="star star-5" for="star-5"></label>
-							  	<input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
-							  	<label class="star star-4" for="star-4"></label>
-							  	<input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
-							  	<label class="star star-3" for="star-3"></label>
-							  	<input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
-							  	<label class="star star-2" for="star-2"></label>
-							  	<input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
-							  	<label class="star star-1" for="star-1"></label>
-							{% endif %}
+							<input class="star star-5" id="star-5" name="star" type="radio" value="5" checked disabled/>
+							<label class="star star-5" for="star-5"></label>
+							<input class="star star-4" id="star-4" name="star" type="radio" value="4" disabled/>
+							<label class="star star-4" for="star-4"></label>
+							<input class="star star-3" id="star-3" name="star" type="radio" value="3" disabled/>
+							<label class="star star-3" for="star-3"></label>
+							<input class="star star-2" id="star-2" name="star" type="radio" value="2" disabled/>
+							<label class="star star-2" for="star-2"></label>
+							<input class="star star-1" id="star-1" name="star" type="radio" value="1" disabled/>
+							<label class="star star-1" for="star-1"></label>
 						{% endif %}
 					{% endif %}
 				{% endif %}
 			{% endif %}
 		{% endif %}
-	{% else %}
-		<font color="red">Desejar avaliar este filme?</font><br/>
-      	<input class="star star-5" id="star-5" type="radio" name="star" value="5" />
-		<label class="star star-5" for="star-5"></label>
-		<input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
-		<label class="star star-4" for="star-4"></label>
-		<input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
-		<label class="star star-3" for="star-3"></label>
-		<input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
-		<label class="star star-2" for="star-2"></label>
-		<input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
-		<label class="star star-1" for="star-1"></label>
-    {% endif %}
-	    <button class="btn btn-primary btn-lg">Avaliar</button>
+	<button class="btn btn-primary btn-lg">Avaliar</button>
 	</form>
 	</div>
 	<hr>
