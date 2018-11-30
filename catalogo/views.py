@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from catalogo.models import Filme, Diretor, FilmeInstancia, Genero
+from catalogo.models import Filme, Diretor, FilmeInstancia, Genero, CustomUser
 from catalogo.models import HistoricoAluguel, HistoricoFilmesAvaliacao, Comentario
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -177,7 +177,12 @@ def pagar(request, filme_id):
     else:
         filme_instancia.alugado_number = filme_instancia.alugado_number + 1
     filme_instancia.save()
-    
+   
+    user = CustomUser.objects.get(username__exact = username_logado)
+    user.alugou = user.alugou + 1
+    user.gastou = user.gastou + 5
+    user.save()
+
     historico = HistoricoAluguel(id=filme_instancia.id, filme=filme_instancia.filme, usuario=username_logado, 
         data_devolucao=data_devolucao, data_aluguel=data_atual, status=filme_instancia.status)
     historico.save()
