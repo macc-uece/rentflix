@@ -44,6 +44,13 @@ def alugar(request, filme_id):
     return render(request, 'pagamento.html', context=context)
 
 @login_required
+def painel_admin(request):
+    filmes = FilmeInstancia.objects.all()
+    context = { 'filmes': filmes }
+    return render(request, 'paineladmin.html', context=context)
+
+
+@login_required
 def pesquisar(request):
     filmesPesquisados = request.GET.get('palavra')
     opcao = request.GET.get('opcao')

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Painel Administrativo</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Diretor</th>
+                <th scope="col">Status</th>
+                <th scope="col">Data de devolução</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for filme in filmes %}
+
+            <tr>
+                <td><a href="{% url 'detail_filme' filme_id=filme.filme.id %}">{{ filme.filme.titulo }}</a> </td>
+                <td><a href="{% url 'detail_diretor' diretor_nome=filme.filme.diretor %}">{{ filme.filme.diretor }}</td>
+                
+                {% if filme.status == 'd' %}
+                <td><div class="alert alert-success">Disponível</div></td>
+                {% elif filme.status == 'e' %} 
+                <td><div class="alert alert-warning">Emprestado</div></td>
+                {% elif filme.status == 'm' %} 
+                <td><div class="alert alert-dark">Manutenção</div></td>
+                {% elif filme.status == 'r' %} 
+                <td><div class="alert alert-primary">Reservado</div></td>
+                {% endif %}
+
+                {% if filme.data_devolucao %}
+                    <td>{{ filme.data_devolucao }}</td>
+                {% else %}
+                    <td> ----- </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

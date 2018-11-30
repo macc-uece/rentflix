@@ -3,6 +3,7 @@ from catalogo import views
 
 urlpatterns = [
    path('', views.index, name='index'), 
+   path('paineladmin/', views.painel_admin, name='painel_admin'),
    path('diretores/', views.diretores, name='diretores'),
    path('diretor/<diretor_nome>', views.detail_diretor, name='detail_diretor'),
    path('generos/', views.generos, name='generos'),
