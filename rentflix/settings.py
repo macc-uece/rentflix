@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'catalogo.apps.CatalogoConfig'
 ]
 
+AUTH_USER_MODEL = "catalogo.CustomUser"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,3 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+

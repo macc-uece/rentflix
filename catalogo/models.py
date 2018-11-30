@@ -1,8 +1,13 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 import uuid
 
 # Create your models here.
+
+class CustomUser(AbstractUser):
+    alugou =  models.IntegerField(default = 0)
+    gastou = models.DecimalField(default = 0, max_digits = 10, decimal_places = 2)
 
 class Genero(models.Model):
     """ Este modelo representa um gênero de um filme """
